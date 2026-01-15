@@ -144,7 +144,7 @@ border: 2px solid rgb(61, 70, 86);
 border-radius:10px;</string>
                </property>
                <property name="placeholderText">
-                <string>Enter your Full Name</string>
+                <string>Enter your Email address</string>
                </property>
               </widget>
              </item>
@@ -212,6 +212,9 @@ border-radius:10px;</string>
 border: 2px solid rgb(61, 70, 86);
 border-radius:10px;</string>
                </property>
+               <property name="echoMode">
+                <enum>QLineEdit::Password</enum>
+               </property>
                <property name="placeholderText">
                 <string>Enter your password</string>
                </property>
@@ -267,6 +270,59 @@ border-radius:10px;</string>
             </property>
             <property name="text">
              <string>REGISTER</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_7">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QPushButton" name="logNowBtn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>70</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI Black</family>
+              <pointsize>-1</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+              <underline>true</underline>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    background: transparent;
+    color: #1E90FF;
+    border: none;
+    text-decoration: underline;
+    font-size: 13px;
+}
+QPushButton:hover {
+    color: #00BFFF;
+}
+</string>
+            </property>
+            <property name="text">
+             <string>Go to Login</string>
             </property>
            </widget>
           </item>

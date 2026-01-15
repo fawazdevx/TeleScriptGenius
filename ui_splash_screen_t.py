@@ -13,7 +13,7 @@ from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
 
-class Ui_SplashScreen2(object):
+class Ui_SplashScreen1(object):
     def setupUi(self, SplashScreen):
         if not SplashScreen.objectName():
             SplashScreen.setObjectName(u"SplashScreen")

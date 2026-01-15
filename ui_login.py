@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'loginCsXfvs.ui'
+## Form generated from reading UI file 'loginSnXguV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -11,7 +11,8 @@
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
-
+from custom_buttons import *
+import resources_rc
 
 class Ui_LoginScreen(object):
     def setupUi(self, LoginScreen):
@@ -142,8 +143,24 @@ class Ui_LoginScreen(object):
         self.passwordInput.setStyleSheet(u"background-color: rgb(57, 65, 80);\n"
 "border: 2px solid rgb(61, 70, 86);\n"
 "border-radius:10px;")
+        self.passwordInput.setEchoMode(QLineEdit.Password)
 
         self.horizontalLayout_3.addWidget(self.passwordInput)
+
+        self.showPassBtn = QPushButton(self.frame_5)
+        self.showPassBtn.setObjectName(u"showPassBtn")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Minimum)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.showPassBtn.sizePolicy().hasHeightForWidth())
+        self.showPassBtn.setSizePolicy(sizePolicy3)
+        self.showPassBtn.setMinimumSize(QSize(0, 0))
+        icon = QIcon()
+        icon.addFile(u"icons/eye.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.showPassBtn.setIcon(icon)
+        self.showPassBtn.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_3.addWidget(self.showPassBtn)
 
 
         self.verticalLayout_2.addWidget(self.frame_5)
@@ -172,7 +189,41 @@ class Ui_LoginScreen(object):
         self.horizontalLayout.addWidget(self.logBtn)
 
 
-        self.verticalLayout.addWidget(self.frame_2)
+        self.verticalLayout.addWidget(self.frame_2, 0, Qt.AlignTop)
+
+        self.frame_6 = QFrame(self.widget)
+        self.frame_6.setObjectName(u"frame_6")
+        self.frame_6.setFrameShape(QFrame.StyledPanel)
+        self.frame_6.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_4 = QHBoxLayout(self.frame_6)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.regNowBtn = QPushButton(self.frame_6)
+        self.regNowBtn.setObjectName(u"regNowBtn")
+        sizePolicy1.setHeightForWidth(self.regNowBtn.sizePolicy().hasHeightForWidth())
+        self.regNowBtn.setSizePolicy(sizePolicy1)
+        self.regNowBtn.setMinimumSize(QSize(200, 70))
+        font4 = QFont()
+        font4.setFamily(u"Segoe UI Black")
+        font4.setBold(True)
+        font4.setUnderline(True)
+        font4.setWeight(75)
+        self.regNowBtn.setFont(font4)
+        self.regNowBtn.setStyleSheet(u"QPushButton {\n"
+"    background: transparent;\n"
+"    color: #1E90FF;\n"
+"    border: none;\n"
+"    text-decoration: underline;\n"
+"    font-size: 13px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    color: #00BFFF;\n"
+"}\n"
+"")
+
+        self.horizontalLayout_4.addWidget(self.regNowBtn)
+
+
+        self.verticalLayout.addWidget(self.frame_6)
 
 
         self.verticalLayout_3.addWidget(self.widget)
@@ -187,10 +238,12 @@ class Ui_LoginScreen(object):
     def retranslateUi(self, LoginScreen):
         LoginScreen.setWindowTitle(QCoreApplication.translate("LoginScreen", u"MainWindow", None))
         self.label_4.setText(QCoreApplication.translate("LoginScreen", u"TelescriptGenius", None))
-        self.label.setText(QCoreApplication.translate("LoginScreen", u"Email Address", None))
+        self.label.setText(QCoreApplication.translate("LoginScreen", u"Email", None))
         self.emailInput.setPlaceholderText(QCoreApplication.translate("LoginScreen", u"Enter your Email Address", None))
         self.label_2.setText(QCoreApplication.translate("LoginScreen", u"Password", None))
         self.passwordInput.setPlaceholderText(QCoreApplication.translate("LoginScreen", u"Enter your password", None))
+        self.showPassBtn.setText("")
         self.logBtn.setText(QCoreApplication.translate("LoginScreen", u"LOGIN", None))
+        self.regNowBtn.setText(QCoreApplication.translate("LoginScreen", u"Go to Register", None))
     # retranslateUi
 

@@ -4,18 +4,18 @@ import fileinput
 import sys
 
 
-def Generate_OwerriAV_CS_Script(CP_ID, ui):
+def Generate_Owerri_CS_Script(CP_ID, ui):
 
     # Open the first Excel file
-    workbook1 = openpyxl.load_workbook('Config/AviatLLD/OwerriLLD_AV/av_optp.xlsx')
-    worksheet1 = workbook1['av_optp']
+    workbook1 = openpyxl.load_workbook('../../Config/ML_10GLLD/OwerriLLD/optp10g.xlsx')
+    worksheet1 = workbook1['optp10g']
 
     # Open the second Excel file
-    workbook2 = openpyxl.load_workbook('Config/AviatLLD/OwerriLLD_AV/av_oslld.xlsx')
-    worksheet2 = workbook2['av_oslld']
+    workbook2 = openpyxl.load_workbook('../../Config/ML_10GLLD/OwerriLLD/oslld10g.xlsx')
+    worksheet2 = workbook2['oslld10g']
 
     # Open the third Excel file
-    workbook3 = openpyxl.load_workbook('Config/AviatLLD/OwerriLLD_AV/sysip2023.xlsx')
+    workbook3 = openpyxl.load_workbook('../../Config/ML_10GLLD/OwerriLLD/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
 
     created_files = []
@@ -32,7 +32,7 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
         ui.showNotification(error_message)
 
     else:
-        success_message = f"Aviat_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
         ui.showNotification(success_message)
 
         # Get the details for the SiteID from the first file
@@ -52,11 +52,11 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
             result_rd_ip = joined_octets
 
             # naming the file
-            file_name = f"ModProj_{sites_details1[2]}_Owerri_CTR.txt"
+            file_name = f"ModProj_{sites_details1[2]}_Owerri.txt"
             print(sites_details1[2])
 
             # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Owerri_Aviat"
+            folder_name = f"{CP_ID}_Owerri_ML6692"
             base_folder_path = "Owerri_Generated_Scripts"
             folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
             os.makedirs(folder_path, exist_ok=True)
@@ -86,7 +86,6 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
                 file.write(f" rd 64908:{result_rd_ip}1000\n")
                 file.write(" route-target import 64999:6490003\n")
                 file.write(" route-target export 64908:202\n")
-                file.write(" route-target export 64999:6490003\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
@@ -95,9 +94,7 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
                 file.write(f" rd 64908:{result_rd_ip}0145\n")
                 file.write(" route-target import 64908:1500\n")
                 file.write(" route-target import 64999:145\n")
-                file.write(" route-target export 64999:145\n")
-                file.write(" route-target import 64908:104\n")
-                file.write(" route-target export 64908:104\n")
+                file.write(" route-target export 64908:145\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
@@ -115,7 +112,7 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ethernet 1/6/5\n")
+                file.write("interface ethernet 1/9/4\n")
                 file.write(" lan\n")
                 file.write("  speed full-duplex100\n")
                 file.write("  no autoneg\n")
@@ -126,7 +123,7 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ethernet 1/6/5\n")
+                file.write("interface ethernet 1/9/5\n")
                 file.write(" lan\n")
                 file.write("  speed full-duplex100\n")
                 file.write("  no autoneg\n")
@@ -138,7 +135,7 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ethernet 1/6/5\n")
+                file.write("interface ethernet 1/9/6\n")
                 file.write(" bridge-port\n")
                 file.write("  l3enable 441\n")
                 file.write("  l3enable 444\n")
@@ -146,7 +143,7 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ethernet 1/6/7\n")
+                file.write("interface ethernet 1/1/1\n")
                 file.write(" bridge-port\n")
                 file.write(f"  l3enable {sites_details1[11]}\n")
                 file.write("  exit\n")
@@ -166,7 +163,7 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
         ui.showNotification(error_message)
 
     else:
-        success_message = f"Aviat_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
         ui.showNotification(success_message)
 
         # Get the details for the SiteID from the first file
@@ -174,11 +171,11 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
             sites_details2 = row[1:18]
 
             # naming the file
-            file_name = f"ModProj_{sites_details2[2]}_Owerri_CTR.txt"
+            file_name = f"ModProj_{sites_details2[2]}_Owerri.txt"
             print(sites_details2[2])
 
             # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Owerri_Aviat"
+            folder_name = f"{CP_ID}_Owerri_ML6692"
             base_folder_path = "Owerri_Generated_Scripts"
             folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
             os.makedirs(folder_path, exist_ok=True)
@@ -189,35 +186,35 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
 
             # Write site details to the same text file for each found row in the second file
             with open(file_path, "a") as file:
-                file.write("interface ip 1/6/5.222\n")
+                file.write("interface ip 1/9/4.222\n")
                 file.write(" ip vrf forwarding ran_owerri\n")
                 file.write(f" ip address {sites_details2[10]}/30\n")
                 file.write(" no shutdown\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ip 1/6/5.333\n")
+                file.write("interface ip 1/9/5.333\n")
                 file.write(" ip vrf forwarding ran_owerri\n")
                 file.write(f" ip address {sites_details2[13]}/30\n")
                 file.write(" no shutdown\n")
                 file.write(f" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ip 1/6/5.331\n")
+                file.write("interface ip 1/9/5.331\n")
                 file.write(" ip vrf forwarding ran_oam_owerri\n")
                 file.write(f" ip address {sites_details2[16]}/30\n")
                 file.write(" no shutdown\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ip 1/6/5.441\n")
+                file.write("interface ip 1/9/6.441\n")
                 file.write(" ip vrf forwarding ran_oam_owerri\n")
                 file.write(f" ip address {sites_details2[7]}/30\n")
                 file.write(" no shutdown\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ip 1/6/5.444\n")
+                file.write("interface ip 1/9/6.444\n")
                 file.write(" ip vrf forwarding lte_ran-gprs_gn\n")
                 file.write(f" ip address {sites_details2[5]}/30\n")
                 file.write(" no shutdown\n")
@@ -237,7 +234,7 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
         ui.showNotification(error_message)
 
     else:
-        success_message = f"Aviat_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
         ui.showNotification(success_message)
 
         # Get the details for the SiteID from the first file
@@ -273,10 +270,10 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
             result_rsvp_ip = joined_octets
 
             # naming the file
-            file_name = f"ModProj_{sites_details1[2]}_Owerri_CTR.txt"
+            file_name = f"ModProj_{sites_details1[2]}_Owerri.txt"
 
             # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Owerri_Aviat"
+            folder_name = f"{CP_ID}_Owerri_ML6692"
             base_folder_path = "Owerri_Generated_Scripts"
             folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
             os.makedirs(folder_path, exist_ok=True)
@@ -287,23 +284,27 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
 
             # Write site details to the same text file for each found row in the second file
             with open(file_path, "a") as file:
-                file.write(f"interface ip 1/6/7.{sites_details1[11]}\n")
+                file.write(f"interface ip 1/1/1.{sites_details1[11]}\n")
                 file.write(f" ip address {sites_details1[6]}/31\n")
                 file.write(" no shutdown\n")
                 file.write(" label-switching\n")
-                file.write(" ip router isis\n")
-                file.write(" isis network point-to-point\n")
+                file.write(" ip router isis isis25\n")
                 file.write(" isis circuit-type level-1\n")
+                file.write(" mpls ldp-igp sync isis level-1 holddown-timer 180\n")
                 file.write(" isis ip bfd\n")
                 file.write(" enable-ldp ipv4\n")
-                file.write(" ldp keepalive-timeout 90\n")
-                file.write(" ldp keepalive-interval 30\n")
+                file.write(" enable-rsvp\n")
+                file.write(" rsvp keep-multiplier 3\n")
+                file.write(" rsvp hello enable\n")
+                file.write(" rsvp hello-interval 10\n")
+                file.write(" rsvp hello-timeout 150\n")
+                file.write(" bfd interval 100 minrx 100 multiplier 3\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
                 file.write("interface lo\n")
                 file.write(f" ip address {sites_details1[13]}/32\n")
-                file.write(" ip router isis\n")
+                file.write(" ip router isis isis25\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
@@ -322,14 +323,12 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("router isis\n")
+                file.write("router isis isis25\n")
                 file.write(" is-type level-1\n")
-                file.write(" lsp-gen-interval 10\n")
-                file.write(" spf-interval-exp level-1 0 5\n")
                 file.write(" metric-style wide\n")
-                file.write(" redistribute connected level-1\n")
-                file.write(f" redistribute static level-1\n")
-                file.write(f" net 49.2026.{result_rsvp_ip}.00\n")
+                file.write(" mpls traffic-eng level-1\n")
+                file.write(f" mpls traffic-eng router-id {sites_details1[13]}\n")
+                file.write(f" net 49.2025.{result_rsvp_ip}.00\n")  # needs review(add function)
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
@@ -342,13 +341,12 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
         if row[2] == CP_ID:
             found_rows4.append(row)
 
-    # Check if the SiteID name was found in the first file
-    if not found_rows3:
-        error_message = f"Could not find {CP_ID} in {worksheet1}."
+    if not found_rows4:
+        error_message = f"Could not find {CP_ID} in {worksheet3}."
         ui.showNotification(error_message)
 
     else:
-        success_message = f"Aviat_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
         ui.showNotification(success_message)
 
         # Get the details for the SiteID from the third file
@@ -386,8 +384,156 @@ def Generate_OwerriAV_CS_Script(CP_ID, ui):
                     file.write(" exit\n")
                     file.write("exit\n")
                     file.write("!\n")
+                    file.write("!\n")  # redefine another function here
+                    appended_to_files.add(file_path)  # Mark the file as appended
+
+    # Find the row number for SiteID name in the second file
+    found_rows5 = []
+    for row in worksheet1.iter_rows(min_row=2, min_col=1, values_only=True):
+        if row[2] == CP_ID:  # made changes to be reviewed
+            found_rows5.append(row)
+
+    # Check if the SiteID name was found in the first file
+    if not found_rows5:
+        error_message = f"Could not find {CP_ID} in {worksheet1}."
+        ui.showNotification(error_message)
+
+    else:
+        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+        ui.showNotification(success_message)
+
+        # Get the details for the SiteID from the first file
+        for index, row in enumerate(found_rows5, start=1):
+            sites_details1 = row[1:18]
+
+            # naming the file
+            file_name = f"ModProj_{sites_details1[2]}_Owerri.txt"
+
+            # Create a folder with the same name pattern as the file name
+            folder_name = f"{CP_ID}_Owerri_ML6692"
+            base_folder_path = "Owerri_Generated_Scripts"
+            folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
+            os.makedirs(folder_path, exist_ok=True)
+
+            # Specify the file path within the created folder
+            file_path = os.path.join(folder_path, file_name)
+            created_files.append(file_path)
+
+            with open(file_path, "a") as file:
+                file.write(f"rsvp-path NFEvia{sites_details1[1]}\n")
+
+    found_rows = []
+    for row in worksheet1.iter_rows(min_row=2, min_col=1, values_only=True):
+        if row[2] == CP_ID:
+            found_rows.append(row)
+
+    if not found_rows:
+        error_message = f"Could not find {CP_ID} in {worksheet1}."
+        ui.showNotification(error_message)
+
+    else:
+        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+        ui.showNotification(success_message)
+
+        # Get the details for the SiteID from the third file
+        sites_details1 = found_rows[0][1:18]  # Take the first match only
+
+        appended_to_files = set()  # Keep track of files where information is appended
+        for file_path in created_files:
+            with open(file_path, "a") as file:
+                if file_path not in appended_to_files:
+                    file.write(f" {sites_details1[13]}\n")
+                    appended_to_files.add(file_path)  # Mark the file as appended
+
+    found_rows6 = []
+    for row in worksheet3.iter_rows(min_row=2, min_col=1, values_only=True):
+        if row[2] == CP_ID:
+            found_rows6.append(row)
+
+    if not found_rows6:
+        error_message = f"Could not find {CP_ID} in {worksheet3}."
+        ui.showNotification(error_message)
+
+    else:
+        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+        ui.showNotification(success_message)
+
+        # Get the details for the SiteID from the third file
+        sites_details3 = found_rows6[0][1:18]  # Take the first match only
+
+        appended_to_files = set()  # Keep track of files where information is appended
+        for file_path in created_files:
+            with open(file_path, "a") as file:
+                if file_path not in appended_to_files:
+                    file.write(f" {sites_details3[2]} strict\n")
+                    file.write(" exit\n")
                     file.write("!\n")
-                    appended_to_files.add(file_path)
+                    file.write("!\n")
+                    appended_to_files.add(file_path)  # Mark the file as appended
+
+    # Find the row number for SiteID name in the second file
+    found_rows7 = []
+    for row in worksheet1.iter_rows(min_row=2, min_col=1, values_only=True):
+        if row[2] == CP_ID:  # made changes to be reviewed
+            found_rows7.append(row)
+
+    # Check if the SiteID name was found in the first file
+    if not found_rows7:
+        error_message = f"Could not find {CP_ID} in {worksheet1}."
+        ui.showNotification(error_message)
+
+    else:
+        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+        ui.showNotification(success_message)
+
+        # Get the details for the SiteID from the first file
+        for index, row in enumerate(found_rows7, start=1):
+            sites_details1 = row[1:18]
+
+            # naming the file
+            file_name = f"ModProj_{sites_details1[2]}_Owerri.txt"
+
+            # Create a folder with the same name pattern as the file name
+            folder_name = f"{CP_ID}_Owerri_ML6692"
+            base_folder_path = "Owerri_Generated_Scripts"
+            folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
+            os.makedirs(folder_path, exist_ok=True)
+
+            # Specify the file path within the created folder
+            file_path = os.path.join(folder_path, file_name)
+            created_files.append(file_path)
+
+            with open(file_path, "a") as file:
+                file.write(f"rsvp-trunk NFEvia{sites_details1[1]} ipv4\n")
+                file.write(f" primary path NFEvia{sites_details1[1]}\n")
+                file.write(f" from {sites_details1[6]}\n")
+
+    # Find the row number for SiteID name in the third file
+    found_rows8 = []
+    for row in worksheet3.iter_rows(min_row=2, min_col=1, values_only=True):
+        if row[2] == CP_ID:
+            found_rows8.append(row)
+
+    if not found_rows8:
+        error_message = f"Could not find {CP_ID} in {worksheet3}."
+        ui.showNotification(error_message)
+
+    else:
+        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+        ui.showNotification(success_message)
+
+        # Get the details for the SiteID from the third file
+        sites_details3 = found_rows8[0][1:18]  # Take the first match only
+
+        appended_to_files = set()  # Keep track of files where information is appended
+        for file_path in created_files:
+            with open(file_path, "a") as file:
+                if file_path not in appended_to_files:
+                    file.write(f" to {sites_details3[2]}\n")
+                    file.write(" exit\n")
+                    file.write("!\n")
+                    file.write("!\n")
+                    appended_to_files.add(file_path)  # Mark the file as appended
 
             # return file_name, file_name
 

@@ -5,16 +5,27 @@ import sys
 
 def Generate_Asaba_CP_Script(sites_name, ui):
 
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    print("Asaba Generator BASE_DIR:", BASE_DIR)
+
     # Open the first Excel file
-    workbook1 = openpyxl.load_workbook('Config/ML_10GLLD/AsabaLLD/aptp10g.xlsx')
+    workbook1 = openpyxl.load_workbook(
+        os.path.normpath(
+            os.path.join(
+                BASE_DIR,
+                "..", "..", "..",
+                "Config", "ML_10GLLD", "AsabaLLD", "aptp10g.xlsx"
+            )
+        )
+    )
     worksheet1 = workbook1['aptp10g']
 
     # Open the second Excel file
-    workbook2 = openpyxl.load_workbook('Config/ML_10GLLD/AsabaLLD/aslld10g.xlsx')
+    workbook2 = openpyxl.load_workbook('../../Config/ML_10GLLD/AsabaLLD/aslld10g.xlsx')
     worksheet2 = workbook2['aslld10g']
 
     # Open the third Excel file
-    workbook3 = openpyxl.load_workbook('Config/ML_10GLLD/AsabaLLD/sysip2023.xlsx')
+    workbook3 = openpyxl.load_workbook('../../Config/ML_10GLLD/AsabaLLD/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
 
     # Find the row number for SiteID name in the first file
@@ -40,8 +51,8 @@ def Generate_Asaba_CP_Script(sites_name, ui):
 
     # Check if the SiteID name was found in either file
     if found_row1 is None and found_row2 is None:
-        error_message = f"Could not find {sites_name} in any of the files."
-        ui.showNotification(error_message)
+        ui.showNotification(f"❌ {sites_name} not found in Asaba LLD files.")
+        return None
     else:
         success_message = f"10G_CP Script has been Generated for {sites_name} with required details from LLDs provided."
         ui.showNotification(success_message)
@@ -325,4 +336,4 @@ def Generate_Asaba_CP_Script(sites_name, ui):
             file.write("!\n")
             file.write("!\n")
 
-        return file_name, file_name
+        return file_path

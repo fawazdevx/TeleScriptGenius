@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'reg_loginvyOclY.ui'
+## Form generated from reading UI file 'reg_loginPPkWqP.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -11,7 +11,7 @@
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
-
+from custom_buttons import *
 
 class Ui_RegScreen(object):
     def setupUi(self, RegScreen):
@@ -141,6 +141,7 @@ class Ui_RegScreen(object):
         self.passwordInput.setStyleSheet(u"background-color: rgb(57, 65, 80);\n"
 "border: 2px solid rgb(61, 70, 86);\n"
 "border-radius:10px;")
+        self.passwordInput.setEchoMode(QLineEdit.Password)
 
         self.horizontalLayout_3.addWidget(self.passwordInput)
 
@@ -182,6 +183,40 @@ class Ui_RegScreen(object):
 
         self.verticalLayout.addWidget(self.frame_2)
 
+        self.frame_7 = QFrame(self.widget)
+        self.frame_7.setObjectName(u"frame_7")
+        self.frame_7.setFrameShape(QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_5 = QHBoxLayout(self.frame_7)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.logNowBtn = QPushButton(self.frame_7)
+        self.logNowBtn.setObjectName(u"logNowBtn")
+        sizePolicy1.setHeightForWidth(self.logNowBtn.sizePolicy().hasHeightForWidth())
+        self.logNowBtn.setSizePolicy(sizePolicy1)
+        self.logNowBtn.setMinimumSize(QSize(200, 70))
+        font4 = QFont()
+        font4.setFamily(u"Segoe UI Black")
+        font4.setBold(True)
+        font4.setUnderline(True)
+        font4.setWeight(75)
+        self.logNowBtn.setFont(font4)
+        self.logNowBtn.setStyleSheet(u"QPushButton {\n"
+"    background: transparent;\n"
+"    color: #1E90FF;\n"
+"    border: none;\n"
+"    text-decoration: underline;\n"
+"    font-size: 13px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    color: #00BFFF;\n"
+"}\n"
+"")
+
+        self.horizontalLayout_5.addWidget(self.logNowBtn)
+
+
+        self.verticalLayout.addWidget(self.frame_7)
+
 
         self.verticalLayout_3.addWidget(self.widget)
 
@@ -196,9 +231,10 @@ class Ui_RegScreen(object):
         RegScreen.setWindowTitle(QCoreApplication.translate("RegScreen", u"MainWindow", None))
         self.label_4.setText(QCoreApplication.translate("RegScreen", u"TelescriptGenius", None))
         self.label.setText(QCoreApplication.translate("RegScreen", u"Email", None))
-        self.emailInput.setPlaceholderText(QCoreApplication.translate("RegScreen", u"Enter your Full Name", None))
+        self.emailInput.setPlaceholderText(QCoreApplication.translate("RegScreen", u"Enter your Email address", None))
         self.label_2.setText(QCoreApplication.translate("RegScreen", u"Password", None))
         self.passwordInput.setPlaceholderText(QCoreApplication.translate("RegScreen", u"Enter your password", None))
         self.regBtn.setText(QCoreApplication.translate("RegScreen", u"REGISTER", None))
+        self.logNowBtn.setText(QCoreApplication.translate("RegScreen", u"Go to Login", None))
     # retranslateUi
 

@@ -3,24 +3,24 @@ import os
 import sys
 
 
-def Generate_AsabaAV_CP_Script(sites_name, ui):
+def Generate_Kano_CP_Script(sites_name, ui):
 
     # Open the first Excel file
-    workbook1 = openpyxl.load_workbook('Config/AviatLLD/AsabaLLD_AV/av_aptp.xlsx')
-    worksheet1 = workbook1['av_aptp']
+    workbook1 = openpyxl.load_workbook('../../Config/ML_10GLLD/KanoLLD/kptp10g.xlsx')
+    worksheet1 = workbook1['kptp10g']
 
     # Open the second Excel file
-    workbook2 = openpyxl.load_workbook('Config/AviatLLD/AsabaLLD_AV/av_aslld.xlsx')
-    worksheet2 = workbook2['av_aslld']
+    workbook2 = openpyxl.load_workbook('../../Config/ML_10GLLD/KanoLLD/kslld10g.xlsx')
+    worksheet2 = workbook2['kslld10g']
 
     # Open the third Excel file
-    workbook3 = openpyxl.load_workbook('Config/AviatLLD/AsabaLLD_AV/sysip2023.xlsx')
+    workbook3 = openpyxl.load_workbook('../../Config/ML_10GLLD/KanoLLD/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
 
     # Find the row number for SiteID name in the first file
     found_row1 = None
     for row in worksheet1.iter_rows(min_row=2, min_col=1, values_only=True):
-        if row[2] == sites_name and row[2] == row[3]:  # made changes to be reviewed
+        if row[2] == sites_name and row[2] == row[3]:
             found_row1 = row
             break
 
@@ -40,10 +40,10 @@ def Generate_AsabaAV_CP_Script(sites_name, ui):
 
     # Check if the SiteID name was found in either file
     if found_row1 is None and found_row2 is None:
-        error_message = f"Could not find {sites_name} in any of the files."
-        ui.showNotification(error_message)
+        ui.showNotification(f"❌ {sites_name} not found in Kano LLD files.")
+        return None
     else:
-        success_message = f"AviatCP Script has been Generated for {sites_name} with required details from LLDs provided."
+        success_message = f"10G_CP Script has been Generated for {sites_name} with required details from LLDs provided."
         ui.showNotification(success_message)
 
         # Get the details for the SiteID from the first file
@@ -86,25 +86,25 @@ def Generate_AsabaAV_CP_Script(sites_name, ui):
             if len(removed_octets_rd_ip[i]) < 3:
                 removed_octets_rd_ip[i] = removed_octets_rd_ip[i].zfill(3)
         joined_octets = "".join(removed_octets_rd_ip)
-        result_rd_ip = joined_octets
+        result_rd_ip = (joined_octets)
 
         # for rsvp_ip needs review
         rsvp_ip = sites_details1[13]
         octets = rsvp_ip.split(".")
         for i in range(len(octets)):
             octets[i] = octets[i].zfill(3)
-        # Removing the third digit from the second octet
+        # Removing the first digit from the second octet    10.192.127.897
         removed_digit_oct1 = octets[1][0]
         # to get the 2nd & 3rd digit of 2nd octet
         removed_digit_oct2a = octets[1][1] + octets[1][2]
         # to get the 1st & 2nd digit of 3rd octet
-        removed_digit_oct2 = octets[2][0] + octets[2][1]
+        removed_digit_oct2b = octets[2][0] + octets[2][1]
         # to get the 4th digit of the 3rd octet + all digits in 4th octet
         removed_digit_oct3 = octets[3][0] + octets[3][1] + octets[3][2]
         # modifying the new 1st octet
         modified_first_octet = octets[0][:4] + removed_digit_oct1
         # modifying the new 2nd octet
-        modified_second_octet = removed_digit_oct2a + octets[1][:-3] + removed_digit_oct2
+        modified_second_octet = removed_digit_oct2a + octets[1][:-3] + removed_digit_oct2b
         # modifying the new 3rd octet
         modified_third_octet = octets[2][2] + removed_digit_oct3
         # Creating the updated list of octets
@@ -114,14 +114,14 @@ def Generate_AsabaAV_CP_Script(sites_name, ui):
             if len(updated_octets[i]) < 4:
                 updated_octets[i] = updated_octets[i].zfill(4)
         joined_octets = ".".join(updated_octets)
-        result_rsvp_ip = joined_octets
+        result_rsvp_ip = (joined_octets)
 
         # naming the file
-        file_name = f"{sites_name}_Asaba_CP_ML-CTR.txt"
+        file_name = f"{sites_name}_Kano_CP_ML_CTN_10G_1Port.txt"
 
         # Create a folder with the same name pattern as the file name
-        folder_name = file_name.replace('CP_ML-CTR.txt', 'Aviat')
-        base_folder_path = "Asaba_Generated_Scripts"
+        folder_name = file_name.replace('CP_ML_CTN_10G_1Port.txt', 'ML6692')
+        base_folder_path = "Kano_Generated_Scripts"
         folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
         os.makedirs(folder_path, exist_ok=True)
 
@@ -135,32 +135,29 @@ def Generate_AsabaAV_CP_Script(sites_name, ui):
             file.write(f" router-id {sites_details1[13]}\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("ip vrf ran_asaba\n")
+            file.write("ip vrf ran_kano\n")
             file.write(f" router-id {sites_details1[13]}\n")
-            file.write(f" rd 64907:{result_rd_ip}0300\n")
-            file.write(" route-target import 64907:300\n")
-            file.write(" route-target import 64907:1500\n")
-            file.write(" route-target export 64907:300\n")
+            file.write(f" rd 64910:{result_rd_ip}0300\n")
+            file.write(" route-target import 64910:300\n")
+            file.write(" route-target import 64910:1500\n")
+            file.write(" route-target export 64910:300\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("ip vrf ran_oam_asaba\n")
+            file.write("ip vrf ran_oam_kano\n")
             file.write(f" router-id {sites_details1[13]}\n")
-            file.write(f" rd 64907:{result_rd_ip}1000\n")
+            file.write(f" rd 64910:{result_rd_ip}1000\n")
             file.write(" route-target import 64999:6490003\n")
-            file.write(" route-target export 64907:202\n")
-            file.write(" route-target export 64999:6490003\n")
+            file.write(" route-target export 64910:202\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
             file.write("ip vrf lte_ran-gprs_gn\n")
             file.write(f" router-id {sites_details1[13]}\n")
-            file.write(f" rd 64907:{result_rd_ip}0145\n")
-            file.write(" route-target import 64907:1500\n")
+            file.write(f" rd 64910:{result_rd_ip}0145\n")
+            file.write(" route-target import 64910:1500\n")
             file.write(" route-target import 64999:145\n")
-            file.write(" route-target export 64999:145\n")
-            file.write(" route-target import 64907:104\n")
-            file.write(" route-target export 64907:104\n")
+            file.write(" route-target export 64910:145\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
@@ -174,19 +171,17 @@ def Generate_AsabaAV_CP_Script(sites_name, ui):
             file.write("router ldp\n")
             file.write(f" router-id {sites_details1[13]}\n")
             file.write(" control-mode ordered\n")
-            file.write(f" transport-address ipv4 {sites_details1[6]}\n")
+            file.write(f" transport-address ipv4 {sites_details1[13]}\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ethernet 1/6/5\n")
+            file.write("interface ethernet 1/9/4\n")
+            file.write(" lan\n")
+            file.write("  speed full-duplex100\n")
+            file.write("  no autoneg\n")
+            file.write("  exit\n")
             file.write(" bridge-port\n")
             file.write("  l3enable 222\n")
-            file.write("  exit\n")
-            file.write(" exit\n")
-            file.write("!\n")
-            file.write("!\n")
-            file.write("interface ethernet 1/6/4\n")
-            file.write(" bridge-port\n")
             file.write("  l3enable 333\n")
             file.write("  l3enable 331\n")
             file.write("  l3enable 441\n")
@@ -195,74 +190,78 @@ def Generate_AsabaAV_CP_Script(sites_name, ui):
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ethernet 1/6/7\n")
+            file.write("interface ethernet 1/9/6\n")
             file.write(" bridge-port\n")
             file.write(f"  l3enable {sites_details1[11]}\n")
             file.write("  exit\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ip 1/6/5.222\n")
-            file.write(" ip vrf forwarding ran_asaba\n")
+            file.write("interface ip 1/9/4.222\n")
+            file.write(" ip vrf forwarding ran_kano\n")
             file.write(f" ip address {sites_details2[10]}/30\n")
             file.write(" no shutdown\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ip 1/6/5.333\n")
-            file.write(" ip vrf forwarding ran_asaba\n")
+            file.write("interface ip 1/9/4.333\n")
+            file.write(" ip vrf forwarding ran_kano\n")
             file.write(f" ip address {sites_details2[13]}/30\n")
             file.write(" no shutdown\n")
             file.write(f" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ip 1/6/5.331\n")
-            file.write(" ip vrf forwarding ran_oam_asaba\n")
+            file.write("interface ip 1/9/4.331\n")
+            file.write(" ip vrf forwarding ran_oam_kano\n")
             file.write(f" ip address {sites_details2[16]}/30\n")
             file.write(" no shutdown\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ip 1/6/5.441\n")
-            file.write(" ip vrf forwarding ran_oam_asaba\n")
+            file.write("interface ip 1/9/4.441\n")
+            file.write(" ip vrf forwarding ran_oam_kano\n")
             file.write(f" ip address {sites_details2[7]}/30\n")
             file.write(" no shutdown\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ip 1/6/5.444\n")
+            file.write("interface ip 1/9/4.444\n")
             file.write(" ip vrf forwarding lte_ran-gprs_gn\n")
             file.write(f" ip address {sites_details2[5]}/30\n")
             file.write(" no shutdown\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write(f"interface ip 1/6/7.{sites_details1[11]}\n")
+            file.write(f"interface ip 1/9/6.{sites_details1[11]}\n")
             file.write(f" ip address {sites_details1[6]}/31\n")
             file.write(" no shutdown\n")
             file.write(" label-switching\n")
-            file.write(" ip router isis\n")
-            file.write(" isis network point-to-point\n")
+            file.write(" ip router isis isis25\n")
             file.write(" isis circuit-type level-1\n")
+            file.write(" mpls ldp-igp sync isis level-1 holddown-timer 180\n")
             file.write(" isis ip bfd\n")
             file.write(" enable-ldp ipv4\n")
-            file.write(" ldp keepalive-timeout 90\n")
-            file.write(" ldp keepalive-interval 30\n")
+            file.write(" enable-rsvp\n")
+            file.write(" rsvp keep-multiplier 3\n")
+            file.write(" rsvp hello enable\n")
+            file.write(" rsvp hello-interval 10\n")
+            file.write(" rsvp hello-timeout 150\n")
+            file.write(" bfd interval 100 minrx 100 multiplier 3\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
             file.write("interface lo\n")
             file.write(f" ip address {sites_details1[13]}/32\n")
-            file.write(" ip router isis\n")
+            file.write(" ip router isis isis25\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ip lo.ran_asaba\n")
+            file.write("interface ip lo.ran_kano\n")
             file.write(f" ip address {sites_details1[13]}/32\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ip lo.ran_oam_asaba\n")
+            file.write("interface ip lo.ran_oam_kano\n")
             file.write(f" ip address {sites_details1[13]}/32\n")
             file.write(" exit\n")
             file.write("!\n")
@@ -272,27 +271,18 @@ def Generate_AsabaAV_CP_Script(sites_name, ui):
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("router isis\n")
+            file.write("router isis isis25\n")
             file.write(" is-type level-1\n")
-            file.write(" lsp-gen-interval 10\n")
-            file.write(" spf-interval-exp level-1 0 5\n")
             file.write(" metric-style wide\n")
-            file.write(" redistribute connected level-1\n")
-            file.write(f" redistribute static level-1\n")
-            file.write(f" net 49.1026.{result_rsvp_ip}.00\n")
+            file.write(" mpls traffic-eng level-1\n")
+            file.write(f" mpls traffic-eng router-id {sites_details1[13]}\n")
+            file.write(f" net 49.4025.{result_rsvp_ip}.00\n")  # needs review(add function)
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write(" address-family ipv6\n")
-            file.write(" no adjacency-check\n")
-            file.write(" exit-address-family\n")
-            file.write(" exit\n")
-            file.write("exit\n")
-            file.write("!\n")
-            file.write("!\n")
-            file.write("router bgp 64907\n")
+            file.write("router bgp 64910\n")
             file.write(f" bgp router-id {sites_details1[13]}\n")
-            file.write(f" neighbor {sites_details3[2]} remote-as 64907\n")
+            file.write(f" neighbor {sites_details3[2]} remote-as 64910\n")
             file.write(f" neighbor {sites_details3[2]} update-source lo\n")
             file.write("!\n")
             file.write("!\n")
@@ -302,25 +292,42 @@ def Generate_AsabaAV_CP_Script(sites_name, ui):
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write(" address-family ipv4 vrf ran_asaba\n")
+            file.write(" address-family ipv4 vrf ran_kano\n")
             file.write(" redistribute connected\n")
             file.write(" redistribute static\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write(" address-family ipv4 vrf ran_oam_asaba\n")
+            file.write(" address-family ipv4 vrf ran_oam_kano\n")
             file.write(" redistribute connected\n")
             file.write(" redistribute static\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write(" address-family ipv4 vrf lte_ran-gprs_gn\n")
+            file.write( " address-family ipv4 vrf lte_ran-gprs_gn\n")
             file.write(" redistribute connected\n")
             file.write(" redistribute static\n")
             file.write(" exit\n")
             file.write("exit\n")
             file.write("!\n")
             file.write("!\n")
+            file.write(f"rsvp-path NFEvia{sites_name}\n")
+            file.write(f" {sites_details3[2]} strict\n")
+            file.write(" exit\n")
+            file.write("!\n")
+            file.write("!\n")
+            file.write(f"rsvp-trunk NFEvia{sites_name} ipv4\n")
+            file.write(f" primary path NFEvia{sites_name}\n")
+            file.write(f"ext-tunnel-id {sites_details1[13]}\n")
+            file.write(f" from {sites_details1[13]}\n")
+            file.write(f" to {sites_details3[2]}\n")
+            file.write(" exit\n")
+            file.write("!\n")
+            file.write("!\n")
 
         return file_name, file_name
+
+
+
+
 

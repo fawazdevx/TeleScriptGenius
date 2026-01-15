@@ -3,19 +3,18 @@ import os
 import fileinput
 import sys
 
-
-def Generate_Enugu_CS_Script(CP_ID, ui):
+def Generate_Asaba_CS_Script(CP_ID, ui):
 
     # Open the first Excel file
-    workbook1 = openpyxl.load_workbook('Config/ML_10GLLD/EnuguLLD/eptp10g.xlsx')
-    worksheet1 = workbook1['eptp10g']
+    workbook1 = openpyxl.load_workbook('../../Config/ML_10GLLD/AsabaLLD/aptp10g.xlsx')
+    worksheet1 = workbook1['aptp10g']
 
     # Open the second Excel file
-    workbook2 = openpyxl.load_workbook('Config/ML_10GLLD/EnuguLLD/eslld10g.xlsx')
-    worksheet2 = workbook2['eslld10g']
+    workbook2 = openpyxl.load_workbook('../../Config/ML_10GLLD/AsabaLLD/aslld10g.xlsx')
+    worksheet2 = workbook2['aslld10g']
 
     # Open the third Excel file
-    workbook3 = openpyxl.load_workbook('Config/ML_10GLLD/EnuguLLD/sysip2023.xlsx')
+    workbook3 = openpyxl.load_workbook('../../Config/ML_10GLLD/AsabaLLD/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
 
     created_files = []
@@ -49,43 +48,15 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
                 if len(removed_octets_rd_ip[i]) < 3:
                     removed_octets_rd_ip[i] = removed_octets_rd_ip[i].zfill(3)
             joined_octets = "".join(removed_octets_rd_ip)
-            result_rd_ip = (joined_octets)
-
-            # for rsvp_ip needs review
-            rsvp_ip = sites_details1[13]
-            octets = rsvp_ip.split(".")
-            for i in range(len(octets)):
-                octets[i] = octets[i].zfill(3)
-            # Removing the third digit from the second octet
-            removed_digit_oct1 = octets[1][0]
-            # to get the 2nd & 3rd digit of 2nd octet
-            removed_digit_oct2a = octets[1][1] + octets[1][2]
-            # to get the 1st & 2nd digit of 3rd octet
-            removed_digit_oct2 = octets[2][0] + octets[2][1]
-            # to get the 4th digit of the 3rd octet + all digits in 4th octet
-            removed_digit_oct3 = octets[3][0] + octets[3][1] + octets[3][2]
-            # modifying the new 1st octet
-            modified_first_octet = octets[0][:4] + removed_digit_oct1
-            # modifying the new 2nd octet
-            modified_second_octet = removed_digit_oct2a + octets[1][:-3] + removed_digit_oct2
-            # modifying the new 3rd octet
-            modified_third_octet = octets[2][2] + removed_digit_oct3
-            # Creating the updated list of octets
-            updated_octets = [f"{modified_first_octet}.{modified_second_octet}.{modified_third_octet}"]
-            # Joining the digits tpogether
-            for i in range(len(updated_octets)):
-                if len(updated_octets[i]) < 4:
-                    updated_octets[i] = updated_octets[i].zfill(4)
-            joined_octets = ".".join(updated_octets)
-            result_rsvp_ip = joined_octets
+            result_rd_ip = joined_octets
 
             # naming the file
-            file_name = f"ModProj_{sites_details1[2]}_Enugu.txt"
+            file_name = f"ModProj_{sites_details1[2]}_Asaba.txt"
             print(sites_details1[2])
 
             # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Enugu_ML6692"
-            base_folder_path = "Enugu_Generated_Scripts"
+            folder_name = f"{CP_ID}_Asaba_ML6692"
+            base_folder_path = "Asaba_Generated_Scripts"
             folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
             os.makedirs(folder_path, exist_ok=True)
 
@@ -100,29 +71,29 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
                 file.write(f" router-id {sites_details1[13]}\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("ip vrf ran_enugu\n")
+                file.write("ip vrf ran_asaba\n")
                 file.write(f" router-id {sites_details1[13]}\n")
-                file.write(f" rd 64909:{result_rd_ip}0300\n")
-                file.write(" route-target import 64909:300\n")
-                file.write(" route-target import 64909:1500\n")
-                file.write(" route-target export 64909:300\n")
+                file.write(f" rd 64907:{result_rd_ip}0300\n")
+                file.write(" route-target import 64907:300\n")
+                file.write(" route-target import 64907:1500\n")
+                file.write(" route-target export 64907:300\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("ip vrf ran_oam_enugu\n")
+                file.write("ip vrf ran_oam_asaba\n")
                 file.write(f" router-id {sites_details1[13]}\n")
-                file.write(f" rd 64909:{result_rd_ip}1000\n")
+                file.write(f" rd 64907:{result_rd_ip}1000\n")
                 file.write(" route-target import 64999:6490003\n")
-                file.write(" route-target export 64909:202\n")
+                file.write(" route-target export 64907:202\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
                 file.write("ip vrf lte_ran-gprs_gn\n")
                 file.write(f" router-id {sites_details1[13]}\n")
-                file.write(f" rd 64909:{result_rd_ip}0145\n")
-                file.write(" route-target import 64909:1500\n")
+                file.write(f" rd 64907:{result_rd_ip}0145\n")
+                file.write(" route-target import 64907:1500\n")
                 file.write(" route-target import 64999:145\n")
-                file.write(" route-target export 64909:145\n")
+                file.write(" route-target export 64907:145\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
@@ -158,6 +129,7 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
                 file.write("  exit\n")
                 file.write(" bridge-port\n")
                 file.write("  l3enable 333\n")
+                file.write("  l3enable 331\n")
                 file.write("  exit\n")
                 file.write(" exit\n")
                 file.write("!\n")
@@ -198,12 +170,12 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
             sites_details2 = row[1:18]
 
             # naming the file
-            file_name = f"ModProj_{sites_details2[2]}_Enugu.txt"
+            file_name = f"ModProj_{sites_details2[2]}_Asaba.txt"
             print(sites_details2[2])
 
             # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Enugu_ML6692"
-            base_folder_path = "Enugu_Generated_Scripts"
+            folder_name = f"{CP_ID}_Asaba_ML6692"
+            base_folder_path = "Asaba_Generated_Scripts"
             folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
             os.makedirs(folder_path, exist_ok=True)
 
@@ -214,21 +186,28 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
             # Write site details to the same text file for each found row in the second file
             with open(file_path, "a") as file:
                 file.write("interface ip 1/9/4.222\n")
-                file.write(" ip vrf forwarding ran_enugu\n")
+                file.write(" ip vrf forwarding ran_asaba\n")
                 file.write(f" ip address {sites_details2[10]}/30\n")
                 file.write(" no shutdown\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
                 file.write("interface ip 1/9/5.333\n")
-                file.write(" ip vrf forwarding ran_enugu\n")
+                file.write(" ip vrf forwarding ran_asaba\n")
                 file.write(f" ip address {sites_details2[13]}/30\n")
                 file.write(" no shutdown\n")
                 file.write(f" exit\n")
                 file.write("!\n")
                 file.write("!\n")
+                file.write("interface ip 1/9/5.331\n")
+                file.write(" ip vrf forwarding ran_oam_asaba\n")
+                file.write(f" ip address {sites_details2[16]}/30\n")
+                file.write(" no shutdown\n")
+                file.write(" exit\n")
+                file.write("!\n")
+                file.write("!\n")
                 file.write("interface ip 1/9/6.441\n")
-                file.write(" ip vrf forwarding ran_oam_enugu\n")
+                file.write(" ip vrf forwarding ran_oam_asaba\n")
                 file.write(f" ip address {sites_details2[7]}/30\n")
                 file.write(" no shutdown\n")
                 file.write(" exit\n")
@@ -290,11 +269,11 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
             result_rsvp_ip = joined_octets
 
             # naming the file
-            file_name = f"ModProj_{sites_details1[2]}_Enugu.txt"
+            file_name = f"ModProj_{sites_details1[2]}_Asaba.txt"
 
             # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Enugu_ML6692"
-            base_folder_path = "Enugu_Generated_Scripts"
+            folder_name = f"{CP_ID}_Asaba_ML6692"
+            base_folder_path = "Asaba_Generated_Scripts"
             folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
             os.makedirs(folder_path, exist_ok=True)
 
@@ -328,12 +307,12 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ip lo.ran_enugu\n")
+                file.write("interface ip lo.ran_asaba\n")
                 file.write(f" ip address {sites_details1[13]}/32\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ip lo.ran_oam_enugu\n")
+                file.write("interface ip lo.ran_oam_asaba\n")
                 file.write(f" ip address {sites_details1[13]}/32\n")
                 file.write(" exit\n")
                 file.write("!\n")
@@ -348,11 +327,11 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
                 file.write(" metric-style wide\n")
                 file.write(" mpls traffic-eng level-1\n")
                 file.write(f" mpls traffic-eng router-id {sites_details1[13]}\n")
-                file.write(f" net 49.3025.{result_rsvp_ip}.00\n")  # needs review(add function)
+                file.write(f" net 49.1025.{result_rsvp_ip}.00\n")  # needs review(add function)
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("router bgp 64909\n")
+                file.write("router bgp 64907\n")
                 file.write(f" bgp router-id {sites_details1[13]}\n")
 
     # Find the row number for SiteID name in the third file
@@ -376,7 +355,7 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
         for file_path in created_files:
             with open(file_path, "a") as file:
                 if file_path not in appended_to_files:
-                    file.write(f" neighbor {sites_details3[2]} remote-as 64909\n")
+                    file.write(f" neighbor {sites_details3[2]} remote-as 64907\n")
                     file.write(f" neighbor {sites_details3[2]} update-source lo\n")
                     file.write("!\n")
                     file.write("!\n")
@@ -386,13 +365,13 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
                     file.write(" exit\n")
                     file.write("!\n")
                     file.write("!\n")
-                    file.write(" address-family ipv4 vrf ran_enugu\n")
+                    file.write(" address-family ipv4 vrf ran_asaba\n")
                     file.write(" redistribute connected\n")
                     file.write(" redistribute static\n")
                     file.write(" exit\n")
                     file.write("!\n")
                     file.write("!\n")
-                    file.write(" address-family ipv4 vrf ran_oam_enugu\n")
+                    file.write(" address-family ipv4 vrf ran_oam_asaba\n")
                     file.write(" redistribute connected\n")
                     file.write(" redistribute static\n")
                     file.write(" exit\n")
@@ -427,11 +406,11 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
             sites_details1 = row[1:18]
 
             # naming the file
-            file_name = f"ModProj_{sites_details1[2]}_Enugu.txt"
+            file_name = f"ModProj_{sites_details1[2]}_Asaba.txt"
 
             # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Enugu_ML6692"
-            base_folder_path = "Enugu_Generated_Scripts"
+            folder_name = f"{CP_ID}_Asaba_ML6692"
+            base_folder_path = "Asaba_Generated_Scripts"
             folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
             os.makedirs(folder_path, exist_ok=True)
 
@@ -511,11 +490,11 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
             sites_details1 = row[1:18]
 
             # naming the file
-            file_name = f"ModProj_{sites_details1[2]}_Enugu.txt"
+            file_name = f"ModProj_{sites_details1[2]}_Asaba.txt"
 
             # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Enugu_ML6692"
-            base_folder_path = "Enugu_Generated_Scripts"
+            folder_name = f"{CP_ID}_Asaba_ML6692"
+            base_folder_path = "Asaba_Generated_Scripts"
             folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
             os.makedirs(folder_path, exist_ok=True)
 
@@ -554,5 +533,9 @@ def Generate_Enugu_CS_Script(CP_ID, ui):
                     file.write("!\n")
                     file.write("!\n")
                     appended_to_files.add(file_path)  # Mark the file as appended
-                    
+
             # return file_name, file_name
+
+
+
+

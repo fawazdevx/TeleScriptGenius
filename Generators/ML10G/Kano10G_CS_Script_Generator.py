@@ -3,18 +3,19 @@ import os
 import fileinput
 import sys
 
-def Generate_Asaba_CS_Script(CP_ID, ui):
+
+def Generate_Kano_CS_Script(CP_ID, ui):
 
     # Open the first Excel file
-    workbook1 = openpyxl.load_workbook('Config/ML_10GLLD/AsabaLLD/aptp10g.xlsx')
-    worksheet1 = workbook1['aptp10g']
+    workbook1 = openpyxl.load_workbook('../../Config/ML_10GLLD/KanoLLD/kptp10g.xlsx')
+    worksheet1 = workbook1['kptp10g']
 
     # Open the second Excel file
-    workbook2 = openpyxl.load_workbook('Config/ML_10GLLD/AsabaLLD/aslld10g.xlsx')
-    worksheet2 = workbook2['aslld10g']
+    workbook2 = openpyxl.load_workbook('../../Config/ML_10GLLD/KanoLLD/kslld10g.xlsx')
+    worksheet2 = workbook2['kslld10g']
 
     # Open the third Excel file
-    workbook3 = openpyxl.load_workbook('Config/ML_10GLLD/AsabaLLD/sysip2023.xlsx')
+    workbook3 = openpyxl.load_workbook('../../Config/ML_10GLLD/KanoLLD/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
 
     created_files = []
@@ -51,12 +52,12 @@ def Generate_Asaba_CS_Script(CP_ID, ui):
             result_rd_ip = joined_octets
 
             # naming the file
-            file_name = f"ModProj_{sites_details1[2]}_Asaba.txt"
+            file_name = f"ModProj_{sites_details1[2]}_Kano.txt"
             print(sites_details1[2])
 
             # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Asaba_ML6692"
-            base_folder_path = "Asaba_Generated_Scripts"
+            folder_name = f"{CP_ID}_Kano_ML6692"
+            base_folder_path = "Kano_Generated_Scripts"
             folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
             os.makedirs(folder_path, exist_ok=True)
 
@@ -71,29 +72,29 @@ def Generate_Asaba_CS_Script(CP_ID, ui):
                 file.write(f" router-id {sites_details1[13]}\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("ip vrf ran_asaba\n")
+                file.write("ip vrf ran_kano\n")
                 file.write(f" router-id {sites_details1[13]}\n")
-                file.write(f" rd 64907:{result_rd_ip}0300\n")
-                file.write(" route-target import 64907:300\n")
-                file.write(" route-target import 64907:1500\n")
-                file.write(" route-target export 64907:300\n")
+                file.write(f" rd 64910:{result_rd_ip}0300\n")
+                file.write(" route-target import 64910:300\n")
+                file.write(" route-target import 64910:1500\n")
+                file.write(" route-target export 64910:300\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("ip vrf ran_oam_asaba\n")
+                file.write("ip vrf ran_oam_kano\n")
                 file.write(f" router-id {sites_details1[13]}\n")
-                file.write(f" rd 64907:{result_rd_ip}1000\n")
+                file.write(f" rd 64910:{result_rd_ip}1000\n")
                 file.write(" route-target import 64999:6490003\n")
-                file.write(" route-target export 64907:202\n")
+                file.write(" route-target export 64910:202\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
                 file.write("ip vrf lte_ran-gprs_gn\n")
                 file.write(f" router-id {sites_details1[13]}\n")
-                file.write(f" rd 64907:{result_rd_ip}0145\n")
-                file.write(" route-target import 64907:1500\n")
+                file.write(f" rd 64910:{result_rd_ip}0145\n")
+                file.write(" route-target import 64910:1500\n")
                 file.write(" route-target import 64999:145\n")
-                file.write(" route-target export 64907:145\n")
+                file.write(" route-target export 64910:145\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
@@ -170,12 +171,12 @@ def Generate_Asaba_CS_Script(CP_ID, ui):
             sites_details2 = row[1:18]
 
             # naming the file
-            file_name = f"ModProj_{sites_details2[2]}_Asaba.txt"
+            file_name = f"ModProj_{sites_details2[2]}_Kano.txt"
             print(sites_details2[2])
 
             # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Asaba_ML6692"
-            base_folder_path = "Asaba_Generated_Scripts"
+            folder_name = f"{CP_ID}_Kano_ML6692"
+            base_folder_path = "Kano_Generated_Scripts"
             folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
             os.makedirs(folder_path, exist_ok=True)
 
@@ -186,28 +187,28 @@ def Generate_Asaba_CS_Script(CP_ID, ui):
             # Write site details to the same text file for each found row in the second file
             with open(file_path, "a") as file:
                 file.write("interface ip 1/9/4.222\n")
-                file.write(" ip vrf forwarding ran_asaba\n")
+                file.write(" ip vrf forwarding ran_kano\n")
                 file.write(f" ip address {sites_details2[10]}/30\n")
                 file.write(" no shutdown\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
                 file.write("interface ip 1/9/5.333\n")
-                file.write(" ip vrf forwarding ran_asaba\n")
+                file.write(" ip vrf forwarding ran_kano\n")
                 file.write(f" ip address {sites_details2[13]}/30\n")
                 file.write(" no shutdown\n")
                 file.write(f" exit\n")
                 file.write("!\n")
                 file.write("!\n")
                 file.write("interface ip 1/9/5.331\n")
-                file.write(" ip vrf forwarding ran_oam_asaba\n")
+                file.write(" ip vrf forwarding ran_oam_kano\n")
                 file.write(f" ip address {sites_details2[16]}/30\n")
                 file.write(" no shutdown\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
                 file.write("interface ip 1/9/6.441\n")
-                file.write(" ip vrf forwarding ran_oam_asaba\n")
+                file.write(" ip vrf forwarding ran_oam_kano\n")
                 file.write(f" ip address {sites_details2[7]}/30\n")
                 file.write(" no shutdown\n")
                 file.write(" exit\n")
@@ -269,11 +270,11 @@ def Generate_Asaba_CS_Script(CP_ID, ui):
             result_rsvp_ip = joined_octets
 
             # naming the file
-            file_name = f"ModProj_{sites_details1[2]}_Asaba.txt"
+            file_name = f"ModProj_{sites_details1[2]}_Kano.txt"
 
             # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Asaba_ML6692"
-            base_folder_path = "Asaba_Generated_Scripts"
+            folder_name = f"{CP_ID}_Kano_ML6692"
+            base_folder_path = "Kano_Generated_Scripts"
             folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
             os.makedirs(folder_path, exist_ok=True)
 
@@ -307,12 +308,12 @@ def Generate_Asaba_CS_Script(CP_ID, ui):
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ip lo.ran_asaba\n")
+                file.write("interface ip lo.ran_kano\n")
                 file.write(f" ip address {sites_details1[13]}/32\n")
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("interface ip lo.ran_oam_asaba\n")
+                file.write("interface ip lo.ran_oam_kano\n")
                 file.write(f" ip address {sites_details1[13]}/32\n")
                 file.write(" exit\n")
                 file.write("!\n")
@@ -327,11 +328,11 @@ def Generate_Asaba_CS_Script(CP_ID, ui):
                 file.write(" metric-style wide\n")
                 file.write(" mpls traffic-eng level-1\n")
                 file.write(f" mpls traffic-eng router-id {sites_details1[13]}\n")
-                file.write(f" net 49.1025.{result_rsvp_ip}.00\n")  # needs review(add function)
+                file.write(f" net 49.4025.{result_rsvp_ip}.00\n")  # needs review(add function)
                 file.write(" exit\n")
                 file.write("!\n")
                 file.write("!\n")
-                file.write("router bgp 64907\n")
+                file.write("router bgp 64910\n")
                 file.write(f" bgp router-id {sites_details1[13]}\n")
 
     # Find the row number for SiteID name in the third file
@@ -355,7 +356,7 @@ def Generate_Asaba_CS_Script(CP_ID, ui):
         for file_path in created_files:
             with open(file_path, "a") as file:
                 if file_path not in appended_to_files:
-                    file.write(f" neighbor {sites_details3[2]} remote-as 64907\n")
+                    file.write(f" neighbor {sites_details3[2]} remote-as 64910\n")
                     file.write(f" neighbor {sites_details3[2]} update-source lo\n")
                     file.write("!\n")
                     file.write("!\n")
@@ -365,13 +366,13 @@ def Generate_Asaba_CS_Script(CP_ID, ui):
                     file.write(" exit\n")
                     file.write("!\n")
                     file.write("!\n")
-                    file.write(" address-family ipv4 vrf ran_asaba\n")
+                    file.write(" address-family ipv4 vrf ran_kano\n")
                     file.write(" redistribute connected\n")
                     file.write(" redistribute static\n")
                     file.write(" exit\n")
                     file.write("!\n")
                     file.write("!\n")
-                    file.write(" address-family ipv4 vrf ran_oam_asaba\n")
+                    file.write(" address-family ipv4 vrf ran_oam_kano\n")
                     file.write(" redistribute connected\n")
                     file.write(" redistribute static\n")
                     file.write(" exit\n")
@@ -386,156 +387,152 @@ def Generate_Asaba_CS_Script(CP_ID, ui):
                     file.write("!\n")  # redefine another function here
                     appended_to_files.add(file_path)  # Mark the file as appended
 
-    # Find the row number for SiteID name in the second file
-    found_rows5 = []
-    for row in worksheet1.iter_rows(min_row=2, min_col=1, values_only=True):
-        if row[2] == CP_ID:  # made changes to be reviewed
-            found_rows5.append(row)
+        # Find the row number for SiteID name in the second file
+        found_rows5 = []
+        for row in worksheet1.iter_rows(min_row=2, min_col=1, values_only=True):
+            if row[2] == CP_ID:  # made changes to be reviewed
+                found_rows5.append(row)
 
-    # Check if the SiteID name was found in the first file
-    if not found_rows5:
-        error_message = f"Could not find {CP_ID} in {worksheet1}."
-        ui.showNotification(error_message)
+        # Check if the SiteID name was found in the first file
+        if not found_rows5:
+            error_message = f"Could not find {CP_ID} in {worksheet1}."
+            ui.showNotification(error_message)
 
-    else:
-        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
-        ui.showNotification(success_message)
+        else:
+            success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+            ui.showNotification(success_message)
 
-        # Get the details for the SiteID from the first file
-        for index, row in enumerate(found_rows5, start=1):
-            sites_details1 = row[1:18]
+            # Get the details for the SiteID from the first file
+            for index, row in enumerate(found_rows5, start=1):
+                sites_details1 = row[1:18]
 
-            # naming the file
-            file_name = f"ModProj_{sites_details1[2]}_Asaba.txt"
+                # naming the file
+                file_name = f"ModProj_{sites_details1[2]}_Kano.txt"
 
-            # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Asaba_ML6692"
-            base_folder_path = "Asaba_Generated_Scripts"
-            folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
-            os.makedirs(folder_path, exist_ok=True)
+                # Create a folder with the same name pattern as the file name
+                folder_name = f"{CP_ID}_Kano_ML6692"
+                base_folder_path = "Kano_Generated_Scripts"
+                folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
+                os.makedirs(folder_path, exist_ok=True)
 
-            # Specify the file path within the created folder
-            file_path = os.path.join(folder_path, file_name)
-            created_files.append(file_path)
+                # Specify the file path within the created folder
+                file_path = os.path.join(folder_path, file_name)
+                created_files.append(file_path)
 
-            with open(file_path, "a") as file:
-                file.write(f"rsvp-path NFEvia{sites_details1[1]}\n")
+                with open(file_path, "a") as file:
+                    file.write(f"rsvp-path NFEvia{sites_details1[1]}\n")
 
-    found_rows = []
-    for row in worksheet1.iter_rows(min_row=2, min_col=1, values_only=True):
-        if row[2] == CP_ID:
-            found_rows.append(row)
+        found_rows = []
+        for row in worksheet1.iter_rows(min_row=2, min_col=1, values_only=True):
+            if row[2] == CP_ID:
+                found_rows.append(row)
 
-    if not found_rows:
-        error_message = f"Could not find {CP_ID} in {worksheet1}."
-        ui.showNotification(error_message)
+        if not found_rows:
+            error_message = f"Could not find {CP_ID} in {worksheet1}."
+            ui.showNotification(error_message)
 
-    else:
-        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
-        ui.showNotification(success_message)
+        else:
+            success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+            ui.showNotification(success_message)
 
-        # Get the details for the SiteID from the third file
-        sites_details1 = found_rows[0][1:18]  # Take the first match only
+            # Get the details for the SiteID from the third file
+            sites_details1 = found_rows[0][1:18]  # Take the first match only
 
-        appended_to_files = set()  # Keep track of files where information is appended
-        for file_path in created_files:
-            with open(file_path, "a") as file:
-                if file_path not in appended_to_files:
-                    file.write(f" {sites_details1[13]}\n")
-                    appended_to_files.add(file_path)  # Mark the file as appended
+            appended_to_files = set()  # Keep track of files where information is appended
+            for file_path in created_files:
+                with open(file_path, "a") as file:
+                    if file_path not in appended_to_files:
+                        file.write(f" {sites_details1[13]}\n")
+                        appended_to_files.add(file_path)  # Mark the file as appended
 
-    found_rows6 = []
-    for row in worksheet3.iter_rows(min_row=2, min_col=1, values_only=True):
-        if row[2] == CP_ID:
-            found_rows6.append(row)
+        found_rows6 = []
+        for row in worksheet3.iter_rows(min_row=2, min_col=1, values_only=True):
+            if row[2] == CP_ID:
+                found_rows6.append(row)
 
-    if not found_rows6:
-        error_message = f"Could not find {CP_ID} in {worksheet3}."
-        ui.showNotification(error_message)
+        if not found_rows6:
+            error_message = f"Could not find {CP_ID} in {worksheet3}."
+            ui.showNotification(error_message)
 
-    else:
-        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
-        ui.showNotification(success_message)
+        else:
+            success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+            ui.showNotification(success_message)
 
-        # Get the details for the SiteID from the third file
-        sites_details3 = found_rows6[0][1:18]  # Take the first match only
+            # Get the details for the SiteID from the third file
+            sites_details3 = found_rows6[0][1:18]  # Take the first match only
 
-        appended_to_files = set()  # Keep track of files where information is appended
-        for file_path in created_files:
-            with open(file_path, "a") as file:
-                if file_path not in appended_to_files:
-                    file.write(f" {sites_details3[2]} strict\n")
-                    file.write(" exit\n")
-                    file.write("!\n")
-                    file.write("!\n")
-                    appended_to_files.add(file_path)  # Mark the file as appended
+            appended_to_files = set()  # Keep track of files where information is appended
+            for file_path in created_files:
+                with open(file_path, "a") as file:
+                    if file_path not in appended_to_files:
+                        file.write(f" {sites_details3[2]} strict\n")
+                        file.write(" exit\n")
+                        file.write("!\n")
+                        file.write("!\n")
+                        appended_to_files.add(file_path)  # Mark the file as appended
 
-    # Find the row number for SiteID name in the second file
-    found_rows7 = []
-    for row in worksheet1.iter_rows(min_row=2, min_col=1, values_only=True):
-        if row[2] == CP_ID:  # made changes to be reviewed
-            found_rows7.append(row)
+        # Find the row number for SiteID name in the second file
+        found_rows7 = []
+        for row in worksheet1.iter_rows(min_row=2, min_col=1, values_only=True):
+            if row[2] == CP_ID:  # made changes to be reviewed
+                found_rows7.append(row)
 
-    # Check if the SiteID name was found in the first file
-    if not found_rows7:
-        error_message = f"Could not find {CP_ID} in {worksheet1}."
-        ui.showNotification(error_message)
+        # Check if the SiteID name was found in the first file
+        if not found_rows7:
+            error_message = f"Could not find {CP_ID} in {worksheet1}."
+            ui.showNotification(error_message)
 
-    else:
-        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
-        ui.showNotification(success_message)
+        else:
+            success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+            ui.showNotification(success_message)
 
-        # Get the details for the SiteID from the first file
-        for index, row in enumerate(found_rows7, start=1):
-            sites_details1 = row[1:18]
+            # Get the details for the SiteID from the first file
+            for index, row in enumerate(found_rows7, start=1):
+                sites_details1 = row[1:18]
 
-            # naming the file
-            file_name = f"ModProj_{sites_details1[2]}_Asaba.txt"
+                # naming the file
+                file_name = f"ModProj_{sites_details1[2]}_Kano.txt"
 
-            # Create a folder with the same name pattern as the file name
-            folder_name = f"{CP_ID}_Asaba_ML6692"
-            base_folder_path = "Asaba_Generated_Scripts"
-            folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
-            os.makedirs(folder_path, exist_ok=True)
+                # Create a folder with the same name pattern as the file name
+                folder_name = f"{CP_ID}_Kano_ML6692"
+                base_folder_path = "Kano_Generated_Scripts"
+                folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
+                os.makedirs(folder_path, exist_ok=True)
 
-            # Specify the file path within the created folder
-            file_path = os.path.join(folder_path, file_name)
-            created_files.append(file_path)
+                # Specify the file path within the created folder
+                file_path = os.path.join(folder_path, file_name)
+                created_files.append(file_path)
 
-            with open(file_path, "a") as file:
-                file.write(f"rsvp-trunk NFEvia{sites_details1[1]} ipv4\n")
-                file.write(f" primary path NFEvia{sites_details1[1]}\n")
-                file.write(f" from {sites_details1[6]}\n")
+                with open(file_path, "a") as file:
+                    file.write(f"rsvp-trunk NFEvia{sites_details1[1]} ipv4\n")
+                    file.write(f" primary path NFEvia{sites_details1[1]}\n")
+                    file.write(f" from {sites_details1[6]}\n")
 
-    # Find the row number for SiteID name in the third file
-    found_rows8 = []
-    for row in worksheet3.iter_rows(min_row=2, min_col=1, values_only=True):
-        if row[2] == CP_ID:
-            found_rows8.append(row)
+        # Find the row number for SiteID name in the third file
+        found_rows8 = []
+        for row in worksheet3.iter_rows(min_row=2, min_col=1, values_only=True):
+            if row[2] == CP_ID:
+                found_rows8.append(row)
 
-    if not found_rows8:
-        error_message = f"Could not find {CP_ID} in {worksheet3}."
-        ui.showNotification(error_message)
+        if not found_rows8:
+            error_message = f"Could not find {CP_ID} in {worksheet3}."
+            ui.showNotification(error_message)
 
-    else:
-        success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
-        ui.showNotification(success_message)
+        else:
+            success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
+            ui.showNotification(success_message)
 
-        # Get the details for the SiteID from the third file
-        sites_details3 = found_rows8[0][1:18]  # Take the first match only
+            # Get the details for the SiteID from the third file
+            sites_details3 = found_rows8[0][1:18]  # Take the first match only
 
-        appended_to_files = set()  # Keep track of files where information is appended
-        for file_path in created_files:
-            with open(file_path, "a") as file:
-                if file_path not in appended_to_files:
-                    file.write(f" to {sites_details3[2]}\n")
-                    file.write(" exit\n")
-                    file.write("!\n")
-                    file.write("!\n")
-                    appended_to_files.add(file_path)  # Mark the file as appended
+            appended_to_files = set()  # Keep track of files where information is appended
+            for file_path in created_files:
+                with open(file_path, "a") as file:
+                    if file_path not in appended_to_files:
+                        file.write(f" to {sites_details3[2]}\n")
+                        file.write(" exit\n")
+                        file.write("!\n")
+                        file.write("!\n")
+                        appended_to_files.add(file_path)  # Mark the file as appended
 
-            # return file_name, file_name
-
-
-
-
+                # return file_name, file_name

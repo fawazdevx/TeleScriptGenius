@@ -3,18 +3,18 @@ import os
 import sys
 
 
-def Generate_EnuguAV_CP_Script(sites_name, ui):
+def Generate_OwerriAV_CP_Script(sites_name, ui):
 
     # Open the first Excel file
-    workbook1 = openpyxl.load_workbook('Config/AviatLLD/EnuguLLD_AV/av_eptp.xlsx')
-    worksheet1 = workbook1['av_eptp']
+    workbook1 = openpyxl.load_workbook('../../Config/AviatLLD/OwerriLLD_AV/av_optp.xlsx')
+    worksheet1 = workbook1['av_optp']
 
     # Open the second Excel file
-    workbook2 = openpyxl.load_workbook('Config/AviatLLD/EnuguLLD_AV/av_eslld.xlsx')
-    worksheet2 = workbook2['av_eslld']
+    workbook2 = openpyxl.load_workbook('../../Config/AviatLLD/OwerriLLD_AV/av_oslld.xlsx')
+    worksheet2 = workbook2['av_oslld']
 
     # Open the third Excel file
-    workbook3 = openpyxl.load_workbook('Config/AviatLLD/EnuguLLD_AV/sysip2023.xlsx')
+    workbook3 = openpyxl.load_workbook('../../Config/AviatLLD/OwerriLLD_AV/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
 
     # Find the row number for SiteID name in the first file
@@ -40,8 +40,8 @@ def Generate_EnuguAV_CP_Script(sites_name, ui):
 
     # Check if the SiteID name was found in either file
     if found_row1 is None and found_row2 is None:
-        error_message = f"Could not find {sites_name} in any of the files."
-        ui.showNotification(error_message)
+        ui.showNotification(f"❌ {sites_name} not found in OwerriAV LLD files.")
+        return None
     else:
         success_message = f"AviatCP Script has been Generated for {sites_name} with required details from LLDs provided."
         ui.showNotification(success_message)
@@ -117,11 +117,11 @@ def Generate_EnuguAV_CP_Script(sites_name, ui):
         result_rsvp_ip = joined_octets
 
         # naming the file
-        file_name = f"{sites_name}_Enugu_CP_ML-CTR.txt"
+        file_name = f"{sites_name}_Owerri_CP_ML_CTR.txt"
 
         # Create a folder with the same name pattern as the file name
-        folder_name = file_name.replace('CP_ML-CTR.txt', 'Aviat')
-        base_folder_path = "Enugu_Generated_Scripts"
+        folder_name = file_name.replace('CP_ML_CTR.txt', 'Aviat')
+        base_folder_path = "Owerri_Generated_Scripts"
         folder_path = os.path.join(os.getcwd(), base_folder_path, folder_name)
         os.makedirs(folder_path, exist_ok=True)
 
@@ -135,32 +135,32 @@ def Generate_EnuguAV_CP_Script(sites_name, ui):
             file.write(f" router-id {sites_details1[13]}\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("ip vrf ran_enugu\n")
+            file.write("ip vrf ran_owerri\n")
             file.write(f" router-id {sites_details1[13]}\n")
-            file.write(f" rd 64909:{result_rd_ip}0300\n")
-            file.write(" route-target import 64909:300\n")
-            file.write(" route-target import 64909:1500\n")
-            file.write(" route-target export 64909:300\n")
+            file.write(f" rd 64908:{result_rd_ip}0300\n")
+            file.write(" route-target import 64908:300\n")
+            file.write(" route-target import 64908:1500\n")
+            file.write(" route-target export 64908:300\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("ip vrf ran_oam_enugu\n")
+            file.write("ip vrf ran_oam_owerri\n")
             file.write(f" router-id {sites_details1[13]}\n")
-            file.write(f" rd 64909:{result_rd_ip}1000\n")
+            file.write(f" rd 64908:{result_rd_ip}1000\n")
             file.write(" route-target import 64999:6490003\n")
-            file.write(" route-target export 64909:202\n")
+            file.write(" route-target export 64908:202\n")
             file.write(" route-target export 64999:6490003\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
             file.write("ip vrf lte_ran-gprs_gn\n")
             file.write(f" router-id {sites_details1[13]}\n")
-            file.write(f" rd 64909:{result_rd_ip}0145\n")
-            file.write(" route-target import 64909:1500\n")
+            file.write(f" rd 64908:{result_rd_ip}0145\n")
+            file.write(" route-target import 64908:1500\n")
             file.write(" route-target import 64999:145\n")
             file.write(" route-target export 64999:145\n")
-            file.write(" route-target import 64909:104\n")
-            file.write(" route-target export 64909:104\n")
+            file.write(" route-target import 64908:104\n")
+            file.write(" route-target export 64908:104\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
@@ -188,6 +188,7 @@ def Generate_EnuguAV_CP_Script(sites_name, ui):
             file.write("interface ethernet 1/6/5\n")
             file.write(" bridge-port\n")
             file.write("  l3enable 333\n")
+            file.write("  l3enable 331\n")
             file.write("  l3enable 441\n")
             file.write("  l3enable 444\n")
             file.write("  exit\n")
@@ -202,21 +203,28 @@ def Generate_EnuguAV_CP_Script(sites_name, ui):
             file.write("!\n")
             file.write("!\n")
             file.write("interface ip 1/6/5.222\n")
-            file.write(" ip vrf forwarding ran_enugu\n")
+            file.write(" ip vrf forwarding ran_owerri\n")
             file.write(f" ip address {sites_details2[10]}/30\n")
             file.write(" no shutdown\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
             file.write("interface ip 1/6/5.333\n")
-            file.write(" ip vrf forwarding ran_enugu\n")
+            file.write(" ip vrf forwarding ran_owerri\n")
             file.write(f" ip address {sites_details2[13]}/30\n")
             file.write(" no shutdown\n")
             file.write(f" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ip 1/6/5.441\n")
-            file.write(" ip vrf forwarding ran_oam_enugu\n")
+            file.write("interface ip 1/6/5.331\n")
+            file.write(" ip vrf forwarding ran_oam_owerri\n")
+            file.write(f" ip address {sites_details2[16]}/30\n")
+            file.write(" no shutdown\n")
+            file.write(" exit\n")
+            file.write("!\n")
+            file.write("!\n")
+            file.write("interface ip 1/6/7.441\n")
+            file.write(" ip vrf forwarding ran_oam_owerri\n")
             file.write(f" ip address {sites_details2[7]}/30\n")
             file.write(" no shutdown\n")
             file.write(" exit\n")
@@ -249,12 +257,12 @@ def Generate_EnuguAV_CP_Script(sites_name, ui):
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ip lo.ran_enugu\n")
+            file.write("interface ip lo.ran_owerri\n")
             file.write(f" ip address {sites_details1[13]}/32\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ip lo.ran_oam_enugu\n")
+            file.write("interface ip lo.ran_oam_owerri\n")
             file.write(f" ip address {sites_details1[13]}/32\n")
             file.write(" exit\n")
             file.write("!\n")
@@ -271,7 +279,7 @@ def Generate_EnuguAV_CP_Script(sites_name, ui):
             file.write(" metric-style wide\n")
             file.write(" redistribute connected level-1\n")
             file.write(f" redistribute static level-1\n")
-            file.write(f" net 49.3026.{result_rsvp_ip}.00\n")  # needs review(add function)
+            file.write(f" net 49.2026.{result_rsvp_ip}.00\n")  # needs review(add function)
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
@@ -279,12 +287,11 @@ def Generate_EnuguAV_CP_Script(sites_name, ui):
             file.write(" no adjacency-check\n")
             file.write(" exit-address-family\n")
             file.write(" exit\n")
-            file.write("exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("router bgp 64909\n")
+            file.write(" router bgp 64908\n")
             file.write(f" bgp router-id {sites_details1[13]}\n")
-            file.write(f" neighbor {sites_details3[2]} remote-as 64909\n")
+            file.write(f" neighbor {sites_details3[2]} remote-as 64908\n")
             file.write(f" neighbor {sites_details3[2]} update-source lo\n")
             file.write("!\n")
             file.write("!\n")
@@ -294,13 +301,13 @@ def Generate_EnuguAV_CP_Script(sites_name, ui):
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write(" address-family ipv4 vrf ran_enugu\n")
+            file.write(" address-family ipv4 vrf ran_owerri\n")
             file.write(" redistribute connected\n")
             file.write(" redistribute static\n")
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write(" address-family ipv4 vrf ran_oam_enugu\n")
+            file.write(" address-family ipv4 vrf ran_oam_owerri\n")
             file.write(" redistribute connected\n")
             file.write(" redistribute static\n")
             file.write(" exit\n")
@@ -313,6 +320,5 @@ def Generate_EnuguAV_CP_Script(sites_name, ui):
             file.write("exit\n")
             file.write("!\n")
             file.write("!\n")
-            
-        return file_name, file_name
 
+        return file_name, file_name
