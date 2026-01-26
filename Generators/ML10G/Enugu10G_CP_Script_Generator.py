@@ -6,16 +6,55 @@ import sys
 def Generate_Enugu_CP_Script(sites_name, ui):
 
     # Open the first Excel file
-    workbook1 = openpyxl.load_workbook('../../Config/ML_10GLLD/EnuguLLD/eptp10g.xlsx')
+    workbook1 = openpyxl.load_workbook('Config/ML_10GLLD/EnuguLLD/eptp10g.xlsx')
     worksheet1 = workbook1['eptp10g']
 
     # Open the second Excel file
-    workbook2 = openpyxl.load_workbook('../../Config/ML_10GLLD/EnuguLLD/eslld10g.xlsx')
+    workbook2 = openpyxl.load_workbook('Config/ML_10GLLD/EnuguLLD/eslld10g.xlsx')
     worksheet2 = workbook2['eslld10g']
 
     # Open the third Excel file
-    workbook3 = openpyxl.load_workbook('../../Config/ML_10GLLD/EnuguLLD/sysip2023.xlsx')
+    workbook3 = openpyxl.load_workbook('Config/ML_10GLLD/EnuguLLD/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
+
+    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # print("Enugu Generator BASE_DIR:", BASE_DIR)
+    #
+    # # Open the first Excel file
+    # workbook1 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "ML_10GLLD", "EnuguLLD", "eptp10g.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet1 = workbook1['eptp10g']
+    #
+    # # Open the second Excel file
+    # workbook2 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "ML_10GLLD", "EnuguLLD", "eslld10g.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet2 = workbook2['eslld10g']
+    #
+    # # Open the third Excel file
+    # workbook3 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "ML_10GLLD", "EnuguLLD", "sysip2023.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet3 = workbook3['sysip2023']
 
     # Find the row number for SiteID name in the first file
     found_row1 = None
@@ -176,13 +215,10 @@ def Generate_Enugu_CP_Script(sites_name, ui):
             file.write("!\n")
             file.write("!\n")
             file.write("interface ethernet 1/9/4\n")
-            file.write(" lan\n")
-            file.write("  speed full-duplex100\n")
-            file.write("  no autoneg\n")
-            file.write("  exit\n")
             file.write(" bridge-port\n")
             file.write("  l3enable 222\n")
             file.write("  l3enable 333\n")
+            file.write("  l3enable 331\n")
             file.write("  l3enable 441\n")
             file.write("  l3enable 444\n")
             file.write("  exit\n")
@@ -317,7 +353,7 @@ def Generate_Enugu_CP_Script(sites_name, ui):
             file.write("!\n")
             file.write("!\n")
 
-        return file_name, file_name
+        return file_path
 
 
 

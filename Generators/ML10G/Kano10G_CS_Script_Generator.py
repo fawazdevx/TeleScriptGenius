@@ -7,16 +7,55 @@ import sys
 def Generate_Kano_CS_Script(CP_ID, ui):
 
     # Open the first Excel file
-    workbook1 = openpyxl.load_workbook('../../Config/ML_10GLLD/KanoLLD/kptp10g.xlsx')
+    workbook1 = openpyxl.load_workbook('Config/ML_10GLLD/KanoLLD/kptp10g.xlsx')
     worksheet1 = workbook1['kptp10g']
 
     # Open the second Excel file
-    workbook2 = openpyxl.load_workbook('../../Config/ML_10GLLD/KanoLLD/kslld10g.xlsx')
+    workbook2 = openpyxl.load_workbook('Config/ML_10GLLD/KanoLLD/kslld10g.xlsx')
     worksheet2 = workbook2['kslld10g']
 
     # Open the third Excel file
-    workbook3 = openpyxl.load_workbook('../../Config/ML_10GLLD/KanoLLD/sysip2023.xlsx')
+    workbook3 = openpyxl.load_workbook('Config/ML_10GLLD/KanoLLD/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
+
+    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # print("Kano Generator BASE_DIR:", BASE_DIR)
+    #
+    # # Open the first Excel file
+    # workbook1 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "ML_10GLLD", "KanoLLD", "kptp10g.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet1 = workbook1['kptp10g']
+    #
+    # # Open the second Excel file
+    # workbook2 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "ML_10GLLD", "KanoLLD", "kslld10g.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet2 = workbook2['kslld10g']
+    #
+    # # Open the third Excel file
+    # workbook3 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "ML_10GLLD", "KanoLLD", "sysip2023.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet3 = workbook3['sysip2023']
 
     created_files = []
 
@@ -28,8 +67,8 @@ def Generate_Kano_CS_Script(CP_ID, ui):
 
     # Check if the SiteID name was found in the first file
     if not found_rows1:
-        error_message = f"Could not find {CP_ID} in {worksheet1}."
-        ui.showNotification(error_message)
+        ui.showNotification(f"❌ {CP_ID} not found in {worksheet1} Kano LLD files.")
+        return None
 
     else:
         success_message = f"10G_CS Script has been Generated for {CP_ID} with required details from LLDs provided."
@@ -113,30 +152,10 @@ def Generate_Kano_CS_Script(CP_ID, ui):
                 file.write("!\n")
                 file.write("!\n")
                 file.write("interface ethernet 1/9/4\n")
-                file.write(" lan\n")
-                file.write("  speed full-duplex100\n")
-                file.write("  no autoneg\n")
-                file.write("  exit\n")
                 file.write(" bridge-port\n")
                 file.write("  l3enable 222\n")
-                file.write("  exit\n")
-                file.write(" exit\n")
-                file.write("!\n")
-                file.write("!\n")
-                file.write("interface ethernet 1/9/5\n")
-                file.write(" lan\n")
-                file.write("  speed full-duplex100\n")
-                file.write("  no autoneg\n")
-                file.write("  exit\n")
-                file.write(" bridge-port\n")
                 file.write("  l3enable 333\n")
                 file.write("  l3enable 331\n")
-                file.write("  exit\n")
-                file.write(" exit\n")
-                file.write("!\n")
-                file.write("!\n")
-                file.write("interface ethernet 1/9/6\n")
-                file.write(" bridge-port\n")
                 file.write("  l3enable 441\n")
                 file.write("  l3enable 444\n")
                 file.write("  exit\n")

@@ -51,25 +51,6 @@
 			}]
 		},
 		{
-			"name": "centerMenuContainer",
-			"defaultSize": [{
-				"width": 0,
-				"height": "parent"
-			}],
-			"collapsedSize": [{
-				"width": 0,
-				"height": "parent"
-			}],
-			"expandedSize": [{
-				"width": 300,
-				"height": "parent"
-			}],
-			"menuTransitionAnimation": [{
-				"animationDuration": 500,
-				"animationEasingCurve": "Linear"
-			}]
-		},
-		{
 			"name": "rightMenuContainer",
 			"defaultSize": [{
 				"width": 0,
@@ -132,34 +113,25 @@
 				{
 					"navigationButtons":[
 						{
-							"homeBtn": "home_page",
-							"genBtn": "temp_page",
-							"routerBtn": "router_page",
-							"linkBtn": "linkCheck_page",
-							"regionsBtn": "region_page",
-							"scriptsBtn": "scripts_page",
-							"aRegBtn": "asaba10G_page",
-							"eRegBtn": "enugu10G_page",
-							"kRegBtn": "kano10G_page",
-							"oRegBtn": "owerri10G_page",
-							"aRegBtnAV": "asabaAV_page",
-							"eRegBtnAV": "enuguAV_page",
-							"kRegBtnAV": "kanoAV_page",
-							"oRegBtnAV": "owerriAV_page"
+							"genQuickBtn": "generator_page",
+							"startQuickBtn": "generator_page",
+							"linkQuickBtn": "link_page"
 						}
 					]
 				}
 			]
 		},
 		{
-			"name":"centerMenuPages",
+			"name":"mainPages",
 			"navigation":[
 				{
 					"navigationButtons":[
 						{
-							"settingsBtn": "page",
-							"infoBtn": "page_2",
-							"helpBtn": "page_3"
+							"dashboardBtn": "home_page",
+							"genBtn": "generator_page",
+							"linkBtn": "link_page",
+							"settingBtn": "settingsPage",
+							"aboutBtn": "aboutPage"
 						}
 					]
 				}
@@ -177,52 +149,15 @@
 					]
 				}
 			]
-		},
-		{
-			"name":"mainPages",
-			"navigation":[
-				{
-					"navigationButtons":[
-						{
-							"getStartBtn": "temp_page",
-							"aviatBtn": "regionAV_page",
-							"ml10GBtn": "region10G_page"
-						}
-					]
-				}
-			]
-		},
-		{
-			"name":"mainPages",
-			"navigation":[
-				{
-					"navigationButtons":[
-						{
-							"backRBtn": "temp_page",
-							"backAVRBtn": "temp_page",
-							"backrsBtn": "temp_page",
-							"backlcBtn": "temp_page",
-							"backABtn": "region10G_page",
-							"backEBtn": "region10G_page",
-							"backKBtn": "region10G_page",
-							"backOBtn": "region10G_page",
-							"backABtnAV": "regionAV_page",
-							"backEBtnAV": "regionAV_page",
-							"backKBtnAV": "regionAV_page",
-							"backOBtnAV": "regionAV_page"
-						}
-					]
-				}
-			]
 		}
 	],
 	"QPushButtonGroup": [
 		{
 			"Buttons": [
-				"homeBtn",
+				"dashboardBtn",
 				"genBtn",
-				"regionsBtn",
-				"scriptsBtn"
+				"linkBtn",
+				"settingBtn"
 			],
 			"Style":[
 				{

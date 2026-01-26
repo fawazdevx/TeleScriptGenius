@@ -7,16 +7,54 @@ import sys
 def Generate_EnuguAV_CS_Script(CP_ID, ui):
 
     # Open the first Excel file
-    workbook1 = openpyxl.load_workbook('../../Config/AviatLLD/EnuguLLD_AV/av_eptp.xlsx')
+    workbook1 = openpyxl.load_workbook('Config/AviatLLD/EnuguLLD_AV/av_eptp.xlsx')
     worksheet1 = workbook1['av_eptp']
 
     # Open the second Excel file
-    workbook2 = openpyxl.load_workbook('../../Config/AviatLLD/EnuguLLD_AV/av_eslld.xlsx')
+    workbook2 = openpyxl.load_workbook('Config/AviatLLD/EnuguLLD_AV/av_eslld.xlsx')
     worksheet2 = workbook2['av_eslld']
 
     # Open the third Excel file
-    workbook3 = openpyxl.load_workbook('../../Config/AviatLLD/EnuguLLD_AV/sysip2023.xlsx')
+    workbook3 = openpyxl.load_workbook('Config/AviatLLD/EnuguLLD_AV/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
+    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # print("Kano Generator BASE_DIR:", BASE_DIR)
+    #
+    # # Open the first Excel file
+    # workbook1 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "AviatLLD", "EnuguLLD_AV", "av_eptp.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet1 = workbook1['av_eptp']
+    #
+    # # Open the second Excel file
+    # workbook2 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "AviatLLD", "EnuguLLD_AV", "av_eslld.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet2 = workbook2['av_eslld']
+    #
+    # # Open the third Excel file
+    # workbook3 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "AviatLLD", "EnuguLLD_AV", "sysip2023.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet3 = workbook3['sysip2023']
 
     created_files = []
 
@@ -28,8 +66,8 @@ def Generate_EnuguAV_CS_Script(CP_ID, ui):
 
     # Check if the SiteID name was found in the first file
     if not found_rows1:
-        error_message = f"Could not find {CP_ID} in {worksheet1}."
-        ui.showNotification(error_message)
+        ui.showNotification(f"❌ {CP_ID} not found in {worksheet1} EnuguAV LLD files.")
+        return None
 
     else:
         success_message = f"Aviat_CS Script has been Generated for {CP_ID} with required details from LLDs provided."

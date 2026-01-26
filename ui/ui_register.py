@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'reg_loginPPkWqP.ui'
+## Form generated from reading UI file 'registerCcePUb.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -17,7 +17,7 @@ class Ui_RegScreen(object):
     def setupUi(self, RegScreen):
         if not RegScreen.objectName():
             RegScreen.setObjectName(u"RegScreen")
-        RegScreen.resize(419, 583)
+        RegScreen.resize(380, 583)
         RegScreen.setStyleSheet(u"*{\n"
 "    border:none;\n"
 "    background-color:transparent;\n"
@@ -74,8 +74,8 @@ class Ui_RegScreen(object):
         self.frame_4.setObjectName(u"frame_4")
         self.frame_4.setFrameShape(QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_2 = QHBoxLayout(self.frame_4)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.verticalLayout_5 = QVBoxLayout(self.frame_4)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.label = QLabel(self.frame_4)
         self.label.setObjectName(u"label")
         sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
@@ -83,16 +83,15 @@ class Ui_RegScreen(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy1)
-        self.label.setMinimumSize(QSize(50, 50))
+        self.label.setMinimumSize(QSize(10, 10))
         font1 = QFont()
         font1.setBold(True)
         font1.setWeight(75)
         self.label.setFont(font1)
-        self.label.setStyleSheet(u"background-color: rgb(0, 0, 255);\n"
-"border-radius:10px;")
+        self.label.setStyleSheet(u"")
         self.label.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout_2.addWidget(self.label)
+        self.verticalLayout_5.addWidget(self.label)
 
         self.emailInput = QLineEdit(self.frame_4)
         self.emailInput.setObjectName(u"emailInput")
@@ -101,6 +100,7 @@ class Ui_RegScreen(object):
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.emailInput.sizePolicy().hasHeightForWidth())
         self.emailInput.setSizePolicy(sizePolicy2)
+        self.emailInput.setMinimumSize(QSize(0, 50))
         font2 = QFont()
         font2.setPointSize(10)
         font2.setBold(True)
@@ -110,7 +110,7 @@ class Ui_RegScreen(object):
 "border: 2px solid rgb(61, 70, 86);\n"
 "border-radius:10px;")
 
-        self.horizontalLayout_2.addWidget(self.emailInput)
+        self.verticalLayout_5.addWidget(self.emailInput)
 
 
         self.verticalLayout_2.addWidget(self.frame_4)
@@ -119,31 +119,31 @@ class Ui_RegScreen(object):
         self.frame_5.setObjectName(u"frame_5")
         self.frame_5.setFrameShape(QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_3 = QHBoxLayout(self.frame_5)
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.verticalLayout_6 = QVBoxLayout(self.frame_5)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.label_2 = QLabel(self.frame_5)
         self.label_2.setObjectName(u"label_2")
         sizePolicy1.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
         self.label_2.setSizePolicy(sizePolicy1)
-        self.label_2.setMinimumSize(QSize(60, 50))
+        self.label_2.setMinimumSize(QSize(0, 10))
         self.label_2.setFont(font1)
-        self.label_2.setStyleSheet(u"background-color: rgb(0, 0, 255);\n"
-"border-radius:10px;")
+        self.label_2.setStyleSheet(u"")
         self.label_2.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout_3.addWidget(self.label_2)
+        self.verticalLayout_6.addWidget(self.label_2)
 
         self.passwordInput = QLineEdit(self.frame_5)
         self.passwordInput.setObjectName(u"passwordInput")
         sizePolicy2.setHeightForWidth(self.passwordInput.sizePolicy().hasHeightForWidth())
         self.passwordInput.setSizePolicy(sizePolicy2)
+        self.passwordInput.setMinimumSize(QSize(0, 50))
         self.passwordInput.setFont(font2)
         self.passwordInput.setStyleSheet(u"background-color: rgb(57, 65, 80);\n"
 "border: 2px solid rgb(61, 70, 86);\n"
 "border-radius:10px;")
         self.passwordInput.setEchoMode(QLineEdit.Password)
 
-        self.horizontalLayout_3.addWidget(self.passwordInput)
+        self.verticalLayout_6.addWidget(self.passwordInput)
 
 
         self.verticalLayout_2.addWidget(self.frame_5)
@@ -229,7 +229,12 @@ class Ui_RegScreen(object):
 
     def retranslateUi(self, RegScreen):
         RegScreen.setWindowTitle(QCoreApplication.translate("RegScreen", u"MainWindow", None))
-        self.label_4.setText(QCoreApplication.translate("RegScreen", u"TelescriptGenius", None))
+        self.label_4.setText(QCoreApplication.translate("RegScreen", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:600; color:#25bfff;\">TelescriptGenius</span></p>\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">SCRIPTING SIMPLICITY</p></body></html>", None))
         self.label.setText(QCoreApplication.translate("RegScreen", u"Email", None))
         self.emailInput.setPlaceholderText(QCoreApplication.translate("RegScreen", u"Enter your Email address", None))
         self.label_2.setText(QCoreApplication.translate("RegScreen", u"Password", None))

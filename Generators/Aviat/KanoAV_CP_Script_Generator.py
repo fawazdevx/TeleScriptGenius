@@ -6,16 +6,54 @@ import sys
 def Generate_KanoAV_CP_Script(sites_name, ui):
 
     # Open the first Excel file
-    workbook1 = openpyxl.load_workbook('../../Config/AviatLLD/KanoLLD_AV/av_kptp.xlsx')
+    workbook1 = openpyxl.load_workbook('Config/AviatLLD/KanoLLD_AV/av_kptp.xlsx')
     worksheet1 = workbook1['av_kptp']
 
     # Open the second Excel file
-    workbook2 = openpyxl.load_workbook('../../Config/AviatLLD/KanoLLD_AV/av_kslld.xlsx')
+    workbook2 = openpyxl.load_workbook('Config/AviatLLD/KanoLLD_AV/av_kslld.xlsx')
     worksheet2 = workbook2['av_kslld']
 
     # Open the third Excel file
-    workbook3 = openpyxl.load_workbook('../../Config/AviatLLD/KanoLLD_AV/sysip2023.xlsx')
+    workbook3 = openpyxl.load_workbook('Config/AviatLLD/KanoLLD_AV/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
+    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # print("Kano Generator BASE_DIR:", BASE_DIR)
+    #
+    # # Open the first Excel file
+    # workbook1 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "AviatLLD", "KanoLLD_AV", "av_kptp.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet1 = workbook1['av_kptp']
+    #
+    # # Open the second Excel file
+    # workbook2 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "AviatLLD", "KanoLLD_AV", "av_kslld.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet2 = workbook2['av_kslld']
+    #
+    # # Open the third Excel file
+    # workbook3 = openpyxl.load_workbook(
+    #     os.path.normpath(
+    #         os.path.join(
+    #             BASE_DIR,
+    #             "..", "..",
+    #             "Config", "AviatLLD", "KanoLLD_AV", "sysip2023.xlsx"
+    #         )
+    #     )
+    # )
+    # worksheet3 = workbook3['sysip2023']
 
     # Find the row number for SiteID name in the first file
     found_row1 = None
