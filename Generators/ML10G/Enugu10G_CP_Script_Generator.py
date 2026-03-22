@@ -225,7 +225,7 @@ def Generate_Enugu_CP_Script(sites_name, ui):
             file.write(" exit\n")
             file.write("!\n")
             file.write("!\n")
-            file.write("interface ethernet 1/9/4\n")
+            file.write("interface ethernet 1/9/6\n")
             file.write(" bridge-port\n")
             file.write(f"  l3enable {sites_details1[11]}\n")
             file.write("  exit\n")
