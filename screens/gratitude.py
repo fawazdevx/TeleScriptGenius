@@ -41,13 +41,13 @@ class GratitudeScreen(QMainWindow):
         self.next_btn = QPushButton("Continue")
         self.next_btn.setFixedSize(160, 45)
         self.next_btn.setFont(QFont("Segoe UI", 11, QFont.Bold))
-        self.next_btn.clicked.connect(self.go_birthdate_detect)
+        self.next_btn.clicked.connect(self.go_welcome)
 
         layout.addWidget(self.label)
         layout.addWidget(self.next_btn, alignment=Qt.AlignCenter)
 
-    def go_birthdate_detect(self):
+    def go_welcome(self):
         self.close()
-        from main import show_birthdate_detect
-        show_birthdate_detect()
+        from main import show_welcome
+        show_welcome()
 

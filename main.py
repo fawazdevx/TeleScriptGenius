@@ -9,8 +9,6 @@ from screens.login import LoginScreen
 from screens.register import RegisterScreen
 from screens.welcome import WelcomeScreen
 from screens.gratitude import GratitudeScreen
-from screens.birthdate_detect import BirthdayDetectScreen
-from screens.birthdate import BirthdayScreen
 from PyQt5.QtCore import QPropertyAnimation, QRect
 from PyQt5.QtWidgets import *
 
@@ -272,17 +270,6 @@ windows = {}
 def show_gratitude():
     windows["gratitude"] = GratitudeScreen()
     windows["gratitude"].show()
-
-
-def show_birthdate_detect():
-    windows["birthday_detect"] = BirthdayDetectScreen()
-    windows["birthday_detect"].show()
-
-
-
-def show_birthdate():
-    windows["birthdate"] = BirthdayScreen()
-    windows["birthdate"].show()
 
 
 def show_welcome():
