@@ -17,44 +17,7 @@ def Generate_AsabaAV_CS_Script(CP_ID, ui):
     # Open the third Excel file
     workbook3 = openpyxl.load_workbook('Config/AviatLLD/AsabaLLD_AV/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
-    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    # print("Asaba Generator BASE_DIR:", BASE_DIR)
-    #
-    # # Open the first Excel file
-    # workbook1 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "AviatLLD", "AsabaLLD_AV", "av_aptp.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet1 = workbook1['av_aptp']
-    #
-    # # Open the second Excel file
-    # workbook2 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "AviatLLD", "AsabaLLD_AV", "av_aslld.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet2 = workbook2['av_aslld']
-    #
-    # # Open the third Excel file
-    # workbook3 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "AviatLLD", "AsabaLLD_AV", "sysip2023.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet3 = workbook3['sysip2023']
+
 
     created_files = []
 

@@ -18,44 +18,6 @@ def Generate_Owerri_CS_Script(CP_ID, ui):
     workbook3 = openpyxl.load_workbook('Config/ML_10GLLD/OwerriLLD/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
 
-    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    # print("Owerri Generator BASE_DIR:", BASE_DIR)
-    #
-    # # Open the first Excel file
-    # workbook1 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "ML_10GLLD", "OwerriLLD", "optp10g.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet1 = workbook1['optp10g']
-    #
-    # # Open the second Excel file
-    # workbook2 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "ML_10GLLD", "OwerriLLD", "oslld10g.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet2 = workbook2['oslld10g']
-    #
-    # # Open the third Excel file
-    # workbook3 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "ML_10GLLD", "OwerriLLD", "sysip2023.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet3 = workbook3['sysip2023']
 
     created_files = []
 

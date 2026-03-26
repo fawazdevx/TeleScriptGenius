@@ -17,44 +17,7 @@ def Generate_Enugu_CP_Script(sites_name, ui):
     workbook3 = openpyxl.load_workbook('Config/ML_10GLLD/EnuguLLD/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
 
-    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    # print("Enugu Generator BASE_DIR:", BASE_DIR)
-    #
-    # # Open the first Excel file
-    # workbook1 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "ML_10GLLD", "EnuguLLD", "eptp10g.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet1 = workbook1['eptp10g']
-    #
-    # # Open the second Excel file
-    # workbook2 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "ML_10GLLD", "EnuguLLD", "eslld10g.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet2 = workbook2['eslld10g']
-    #
-    # # Open the third Excel file
-    # workbook3 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "ML_10GLLD", "EnuguLLD", "sysip2023.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet3 = workbook3['sysip2023']
+
 
     # Find the row number for SiteID name in the first file
     found_row1 = None

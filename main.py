@@ -18,7 +18,7 @@ from PyQt5.QtWidgets import *
 from Custom_Widgets.Widgets import *
 
 app_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
-# Define the folder path inside the app installation folder
+# Defining the folder path inside the app installation folder
 folder_path = os.path.join(app_directory, "userdata_01e4.dat")
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
@@ -29,7 +29,7 @@ else:
 # ==> GLOBAL VARIABLES
 counter = 0
 # -------------------------------------------------
-# SCRIPT COUNT (NEW – persistent)
+# SCRIPT COUNT
 # -------------------------------------------------
 GENERATED_REGISTRY_FILE = os.path.join(folder_path, "generated_scripts.json")
 
@@ -58,7 +58,7 @@ shadow_elements = {
 
 
 # -------------------------------------------------
-# IMPORT GENERATORS (UNCHANGED)
+# IMPORT GENERATORS
 # -------------------------------------------------
 # ML10G
 from Generators.ML10G.Asaba10G_CP_Script_Generator import Generate_Asaba_CP_Script
@@ -81,7 +81,7 @@ from Generators.Aviat.EnuguAV_CS_Script_Generator import Generate_EnuguAV_CS_Scr
 from Generators.Aviat.KanoAV_CS_Script_Generator import  Generate_KanoAV_CS_Script
 from Generators.Aviat.OwerriAV_CS_Script_Generator import Generate_OwerriAV_CS_Script
 
-# Step 2: Map them
+
 GENERATORS = {
     # ML10G
     "ASABA_10G_CP": Generate_Asaba_CP_Script,
@@ -200,7 +200,7 @@ class MainWindow(QMainWindow):
         region_ui = self.ui.regionBox.currentText().strip()
         script_type_ui = self.ui.tempBox.currentText().strip()
 
-        # Map UI selections to GENERATOR keys
+        # Mapping UI selections to GENERATOR keys
         REGION_MAP = {
             # ML10G
             "Asaba": "ASABA",

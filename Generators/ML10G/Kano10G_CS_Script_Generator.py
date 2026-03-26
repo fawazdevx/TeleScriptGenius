@@ -18,44 +18,7 @@ def Generate_Kano_CS_Script(CP_ID, ui):
     workbook3 = openpyxl.load_workbook('Config/ML_10GLLD/KanoLLD/sysip2023.xlsx')
     worksheet3 = workbook3['sysip2023']
 
-    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    # print("Kano Generator BASE_DIR:", BASE_DIR)
-    #
-    # # Open the first Excel file
-    # workbook1 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "ML_10GLLD", "KanoLLD", "kptp10g.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet1 = workbook1['kptp10g']
-    #
-    # # Open the second Excel file
-    # workbook2 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "ML_10GLLD", "KanoLLD", "kslld10g.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet2 = workbook2['kslld10g']
-    #
-    # # Open the third Excel file
-    # workbook3 = openpyxl.load_workbook(
-    #     os.path.normpath(
-    #         os.path.join(
-    #             BASE_DIR,
-    #             "..", "..",
-    #             "Config", "ML_10GLLD", "KanoLLD", "sysip2023.xlsx"
-    #         )
-    #     )
-    # )
-    # worksheet3 = workbook3['sysip2023']
+
 
     created_files = []
 
