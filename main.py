@@ -18,7 +18,7 @@ from PyQt5.QtWidgets import *
 from Custom_Widgets.Widgets import *
 
 app_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
-# Defining the folder path inside the app installation folder
+
 folder_path = os.path.join(app_directory, "userdata_01e4.dat")
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
