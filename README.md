@@ -39,7 +39,7 @@ TelescriptGenius is a desktop app for telecom professionals, built with Python, 
 
 ## License
 
-This project is licensed under a proprietary license. See [LICENSE.txt](./LICENSE.txt) for terms.
+This project is licensed under a proprietary license. See [LICENSE](./LICENSE) for terms.
 
 ---
 
