@@ -1,4 +1,4 @@
-# 🚀 TelescriptGenius
+# TelescriptGenius
 
 **TelescriptGenius** is a desktop application for telecom professionals, built with Python and PyQt5.  
 It simplifies telecom script generation through an intuitive GUI, enabling faster, template-based creation of configuration scripts for network operations.
