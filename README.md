@@ -62,7 +62,7 @@ It allows users to:
 
 ## 📸 Demo
 
-![TelescriptGenius UI](UI/images/telescript.jpg)
+![TelescriptGenius UI](ui/images/telescript.jpg)
 
 
 
