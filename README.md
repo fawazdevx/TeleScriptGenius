@@ -45,4 +45,4 @@ This project is licensed under a proprietary license. See [LICENSE](./LICENSE) f
 
 ## Contact
 
-For commercial or partnership inquiries, email: [oyebodefawaz2020@gmail.com.com]
+For commercial or partnership inquiries, email: [oyebodefawaz2020@gmail.com]
