@@ -15,7 +15,7 @@ It simplifies telecom script generation through an intuitive GUI, enabling faste
 
 ---
 
-## ⚡ Problem
+## Problem
 
 In telecom engineering workflows, engineers often need to generate repetitive configuration scripts for multiple network sites, clusters, and regions.
 
@@ -62,7 +62,7 @@ It allows users to:
 
 ## 📸 Demo
 
-![TelescriptGenius UI](screenshots/gui.png)
+![TelescriptGenius UI](UI/images/telescript.jpg)
 
 
 
