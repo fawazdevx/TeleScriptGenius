@@ -6,7 +6,7 @@ TelescriptGenius is a desktop app for telecom professionals, built with Python, 
 
 ## Disclaimer
 
-> **TelescriptGenius is an independent project developed by Fawazdevx. It is not sponsored, endorsed, or affiliated with anyone.  
+> **TelescriptGenius is an independent project and is not affiliated with any company or organization.  
 > Any configuration examples or site identifiers are for demonstration purposes only and do not represent real operational data.**
 
 ---
